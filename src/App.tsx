@@ -8,7 +8,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import "./App.css";
-import { Typography, ListItemIcon } from "@material-ui/core";
+import { Typography, ListItemIcon, Divider, Toolbar } from "@material-ui/core";
 import MailIcon from "@material-ui/icons/Mail";
 
 const drawerWidth = 200;
@@ -45,11 +45,13 @@ const App: React.FC = () => {
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar}>
-        <Tabs value={value} aria-label="task_steps_bar">
-          <Tab label="Item One" />
-          <Tab label="Item Two" />
-          <Tab label="Item Three" />
-        </Tabs>
+        <Toolbar>
+          <Tabs value={value} aria-label="task_steps_bar">
+            <Tab label="Item One" />
+            <Tab label="Item Two" />
+            <Tab label="Item Three" />
+          </Tabs>
+        </Toolbar>
       </AppBar>
       <Drawer
         variant="permanent"
@@ -60,6 +62,7 @@ const App: React.FC = () => {
         anchor="left"
       >
         <div className={classes.toolbar} />
+        <Divider />
         <List>
           {["Item", "Item", "Item", "Item"].map((text, index) => (
             <ListItem button key={text}>
