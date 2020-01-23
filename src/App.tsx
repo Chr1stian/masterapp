@@ -8,7 +8,13 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import "./App.css";
-import { Typography, ListItemIcon, Divider, Toolbar } from "@material-ui/core";
+import {
+  Typography,
+  ListItemIcon,
+  Divider,
+  Toolbar,
+  Button
+} from "@material-ui/core";
 import MailIcon from "@material-ui/icons/Mail";
 
 const drawerWidth = 200;
@@ -34,6 +40,10 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       backgroundColor: theme.palette.background.default,
       padding: theme.spacing(2)
+    },
+    taskButton: {
+      width: drawerWidth,
+      marginTop: "auto"
     }
   })
 );
@@ -41,6 +51,11 @@ const useStyles = makeStyles((theme: Theme) =>
 const App: React.FC = () => {
   const classes = useStyles();
   const [value] = React.useState(0);
+  const [tasks, setTasks] = React.useState(["Test"]);
+  const addTask = (newTask: string): void => {
+    const newTasks: string[] = [...tasks, newTask];
+    setTasks(newTasks);
+  };
 
   return (
     <div className={classes.root}>
@@ -64,8 +79,8 @@ const App: React.FC = () => {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-          {["Item", "Item", "Item", "Item"].map((text, index) => (
-            <ListItem button key={text}>
+          {tasks.map((text, index) => (
+            <ListItem button key={index}>
               <ListItemIcon>
                 <MailIcon />
               </ListItemIcon>
@@ -73,6 +88,12 @@ const App: React.FC = () => {
             </ListItem>
           ))}
         </List>
+        <Button
+          className={classes.taskButton}
+          onClick={(): void => addTask("tekst")}
+        >
+          Add task
+        </Button>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
