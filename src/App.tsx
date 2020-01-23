@@ -1,21 +1,11 @@
 import React from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import "./App.css";
-import {
-  Typography,
-  ListItemIcon,
-  Divider,
-  Toolbar,
-  Button
-} from "@material-ui/core";
-import MailIcon from "@material-ui/icons/Mail";
+import { Typography, Toolbar } from "@material-ui/core";
+import Sidebar from "./sidebar/Sidebar";
 
 const drawerWidth = 200;
 
@@ -40,10 +30,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       backgroundColor: theme.palette.background.default,
       padding: theme.spacing(2)
-    },
-    taskButton: {
-      width: drawerWidth,
-      marginTop: "auto"
     }
   })
 );
@@ -68,33 +54,7 @@ const App: React.FC = () => {
           </Tabs>
         </Toolbar>
       </AppBar>
-      <Drawer
-        variant="permanent"
-        className={classes.drawer}
-        classes={{
-          paper: classes.drawerPaper
-        }}
-        anchor="left"
-      >
-        <div className={classes.toolbar} />
-        <Divider />
-        <List>
-          {tasks.map((text, index) => (
-            <ListItem button key={index}>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={text + " " + (index + 1)} />
-            </ListItem>
-          ))}
-        </List>
-        <Button
-          className={classes.taskButton}
-          onClick={(): void => addTask("tekst")}
-        >
-          Add task
-        </Button>
-      </Drawer>
+      <Sidebar tasks={tasks} addTask={addTask}></Sidebar>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph>Lorem ipsum.</Typography>
