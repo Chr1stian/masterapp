@@ -7,6 +7,12 @@ import "./App.css";
 import { Typography, Toolbar } from "@material-ui/core";
 import Sidebar from "./sidebar/Sidebar";
 
+import "codemirror/lib/codemirror.css";
+import "codemirror/theme/material.css";
+import { UnControlled as CodeMirror } from "react-codemirror2";
+require("codemirror/mode/xml/xml");
+require("codemirror/mode/javascript/javascript");
+
 const drawerWidth = 200;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,6 +63,15 @@ const App: React.FC = () => {
       <Sidebar tasks={tasks} addTask={addTask}></Sidebar>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <CodeMirror
+          value="<h1>I ♥ react-codemirror2</h1>"
+          options={{
+            mode: "xml",
+            theme: "material",
+            lineNumbers: true
+          }}
+          onChange={(editor, data, value) => {}}
+        />
         <Typography paragraph>Lorem ipsum.</Typography>
         <Typography paragraph>Dolores it.</Typography>
       </main>
