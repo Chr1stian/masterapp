@@ -9,7 +9,7 @@ import Sidebar from "./sidebar/Sidebar";
 
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
-import { UnControlled as CodeMirror } from "react-codemirror2";
+import { Controlled as CodeMirror } from "react-codemirror2";
 require("codemirror/mode/xml/xml");
 require("codemirror/mode/javascript/javascript");
 
@@ -44,6 +44,7 @@ const App: React.FC = () => {
   const classes = useStyles();
   const [value] = React.useState(0);
   const [tasks, setTasks] = React.useState(["Test"]);
+  const [code, setCode] = React.useState("<h1>I love xml</h1>");
   const addTask = (newTask: string): void => {
     const newTasks: string[] = [...tasks, newTask];
     setTasks(newTasks);
@@ -64,13 +65,18 @@ const App: React.FC = () => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <CodeMirror
-          value="<h1>I ♥ react-codemirror2</h1>"
+          value={code}
           options={{
             mode: "xml",
             theme: "material",
             lineNumbers: true
           }}
-          onChange={(editor, data, value) => {}}
+          onBeforeChange={(_editor, _data, value): void => {
+            setCode(value);
+          }}
+          onChange={(): void => {
+            console.log("code:", code);
+          }}
         />
         <Typography paragraph>Lorem ipsum.</Typography>
         <Typography paragraph>Dolores it.</Typography>
