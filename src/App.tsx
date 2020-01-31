@@ -5,7 +5,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import "./App.css";
 import { Typography, Toolbar } from "@material-ui/core";
-import Sidebar from "./sidebar/Sidebar";
+import Sidebar from "./components/Sidebar";
 
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
@@ -55,6 +55,7 @@ const App: React.FC = () => {
   const [tabIndex, setTabIndex] = React.useState(0);
   const [tasks, setTasks] = React.useState(["Test"]);
   const [code, setCode] = React.useState("<h1>I love xml</h1>");
+  const [selectedTask, setSelectedTask] = React.useState(0);
   // Helper functions
   const addTask = (newTask: string): void => {
     const newTasks: string[] = [...tasks, newTask];
@@ -82,7 +83,12 @@ const App: React.FC = () => {
           </Tabs>
         </Toolbar>
       </AppBar>
-      <Sidebar tasks={tasks} addTask={addTask}></Sidebar>
+      <Sidebar
+        tasks={tasks}
+        addTask={addTask}
+        selectedTask={selectedTask}
+        setSelectedTask={setSelectedTask}
+      ></Sidebar>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <CodeMirror
@@ -101,6 +107,8 @@ const App: React.FC = () => {
         />
         <Typography paragraph>Lorem ipsum.</Typography>
         <Typography paragraph>Dolores it.</Typography>
+        {selectedTask + " | "}
+        {tabIndex}
       </main>
     </div>
   );

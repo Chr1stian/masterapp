@@ -17,6 +17,8 @@ import MailIcon from "@material-ui/icons/Mail";
 interface SidebarProps {
   tasks: string[];
   addTask: (newTask: string) => void;
+  selectedTask: number;
+  setSelectedTask: (taskIndex: number) => void;
 }
 
 const drawerWidth = 200;
@@ -39,8 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
   const classes = useStyles();
-  const [selected, setSelected] = React.useState(0);
-  const { tasks, addTask } = props;
+  const { tasks, addTask, selectedTask, setSelectedTask } = props;
 
   return (
     <div>
@@ -59,8 +60,8 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
             <MenuItem
               button
               key={index}
-              selected={selected === index}
-              onClick={(): void => setSelected(index)}
+              selected={selectedTask === index}
+              onClick={(): void => setSelectedTask(index)}
             >
               <ListItemIcon>
                 <MailIcon />
