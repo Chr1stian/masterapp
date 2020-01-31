@@ -3,7 +3,7 @@ import {
   Drawer,
   Button,
   List,
-  ListItem,
+  MenuItem,
   ListItemText,
   ListItemIcon,
   Divider,
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
   const classes = useStyles();
+  const [selected, setSelected] = React.useState(0);
   const { tasks, addTask } = props;
 
   return (
@@ -55,12 +56,17 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
         <Divider />
         <List>
           {tasks.map((text, index) => (
-            <ListItem button key={index}>
+            <MenuItem
+              button
+              key={index}
+              selected={selected === index}
+              onClick={(): void => setSelected(index)}
+            >
               <ListItemIcon>
                 <MailIcon />
               </ListItemIcon>
               <ListItemText primary={text + " " + (index + 1)} />
-            </ListItem>
+            </MenuItem>
           ))}
         </List>
         <Button

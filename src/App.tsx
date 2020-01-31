@@ -40,21 +40,42 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+interface Task {
+  label: string;
+  items?: string[]; //React.Component
+  code: string;
+}
+
+interface TaskList {
+  tasks: Task[];
+}
+
 const App: React.FC = () => {
   const classes = useStyles();
-  const [value] = React.useState(0);
+  const [tabIndex, setTabIndex] = React.useState(0);
   const [tasks, setTasks] = React.useState(["Test"]);
   const [code, setCode] = React.useState("<h1>I love xml</h1>");
+  // Helper functions
   const addTask = (newTask: string): void => {
     const newTasks: string[] = [...tasks, newTask];
     setTasks(newTasks);
+  };
+  const changeTab = (
+    event: React.ChangeEvent<{}>,
+    selectedTab: number
+  ): void => {
+    setTabIndex(selectedTab);
   };
 
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar}>
         <Toolbar>
-          <Tabs value={value} aria-label="task_steps_bar">
+          <Tabs
+            value={tabIndex}
+            aria-label="task_steps_bar"
+            onChange={changeTab}
+          >
             <Tab label="Item One" />
             <Tab label="Item Two" />
             <Tab label="Item Three" />
