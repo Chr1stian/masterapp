@@ -13,9 +13,10 @@ import {
 } from "@material-ui/core";
 
 import MailIcon from "@material-ui/icons/Mail";
+import { Task } from "../App";
 
 interface SidebarProps {
-  tasks: string[];
+  tasks: Task[];
   addTask: (newTask: string) => void;
   selectedTask: number;
   setSelectedTask: (taskIndex: number) => void;
@@ -56,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-          {tasks.map((text, index) => (
+          {tasks.map((task, index) => (
             <MenuItem
               button
               key={index}
@@ -66,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
               <ListItemIcon>
                 <MailIcon />
               </ListItemIcon>
-              <ListItemText primary={text + " " + (index + 1)} />
+              <ListItemText primary={task.label + " " + (index + 1)} />
             </MenuItem>
           ))}
         </List>
