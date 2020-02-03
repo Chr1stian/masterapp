@@ -38,11 +38,6 @@ export interface Task {
 
 const App: React.FC = () => {
   const classes = useStyles();
-  const [task, setTask] = React.useState<Task>({
-    label: "First task",
-    code: "<h1>I kinda like xml</h1>"
-  });
-
   // Handling of selection in drawer and tabs
   const [tabIndex, setTabIndex] = React.useState(0);
   const [selectedTask, setSelectedTask] = React.useState(0);
@@ -57,7 +52,9 @@ const App: React.FC = () => {
     setTasks(newTasks);
   };
   const changeTask = (task: Task): void => {
-    setTask(task);
+    const oldTasks = [...tasks];
+    oldTasks[selectedTask] = task;
+    setTasks(tasks);
   };
 
   const changeTab = (

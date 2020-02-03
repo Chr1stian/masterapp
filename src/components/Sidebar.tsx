@@ -73,7 +73,7 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
         </List>
         <Button
           className={classes.taskButton}
-          onClick={(): void => addTask("tekst")}
+          onClick={(): void => addTask("Oppgave ")}
         >
           Add task
         </Button>
