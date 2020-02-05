@@ -5,7 +5,7 @@ import { CodeInput } from ".";
 interface ContentContainerProps {
   className?: string;
   task: Task;
-  changeTask: (task: Task) => void;
+  changeTask: (name: string, task: Task) => void;
 }
 
 const ContentContainer: React.FC<ContentContainerProps> = (

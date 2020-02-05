@@ -36,16 +36,25 @@ export interface Task {
   code: string;
 }
 
-const App: React.FC = () => {
+export interface Props {
+  Tasks?: {
+    [key: number]: Task;
+  };
+}
+
+const App: React.FC<Props> = (props: Props) => {
   const classes = useStyles();
   // Handling of selection in drawer and tabs
   const [tabIndex, setTabIndex] = React.useState(0);
   const [selectedTask, setSelectedTask] = React.useState(0);
 
-  const [tasks, setTasks] = React.useState<Task[]>([
-    { label: "Test", code: "<h1>I hate xml</h1>" }
-  ]);
-  // Helper functions
+  const [tasks, setTasks] = React.useState({
+    1: { label: "test1", code: "testcode1" },
+    2: { label: "test2", code: "testcode2" },
+    3: { label: "test3", code: "testcode3" }
+  });
+
+  /* Helper functions
   const addTask = (taskLabel: string): void => {
     const newTask = { label: taskLabel, code: "" };
     const newTasks: Task[] = [...tasks, newTask];
@@ -55,6 +64,11 @@ const App: React.FC = () => {
     const oldTasks = [...tasks];
     oldTasks[selectedTask] = task;
     setTasks(tasks);
+  };
+  */
+
+  const updateTask = (name: string, task: Task): void => {
+    setTasks(prevTasks => ({ ...prevTasks, [name]: task }));
   };
 
   const changeTab = (
@@ -72,14 +86,14 @@ const App: React.FC = () => {
         className={classes.appBar}
       />
       <Sidebar
-        tasks={tasks}
-        addTask={addTask}
+        Tasks={tasks}
+        // addTask={addTask}
         selectedTask={selectedTask}
         setSelectedTask={setSelectedTask}
       />
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <ContentContainer task={tasks[selectedTask]} changeTask={changeTask} />
+        <ContentContainer task={tasks[1]} changeTask={updateTask} />
       </main>
     </div>
   );
