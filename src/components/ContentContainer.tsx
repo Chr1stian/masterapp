@@ -15,9 +15,6 @@ const ContentContainer: React.FC<ContentContainerProps> = (
 
   return (
     <div className={className}>
-      {task.label}
-      {"|"}
-      {task.code}
       <CodeInput code={task.code} changeTask={changeTask} task={task} />
     </div>
   );

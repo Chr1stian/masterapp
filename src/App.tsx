@@ -47,7 +47,7 @@ const App: React.FC = () => {
   ]);
   // Helper functions
   const addTask = (taskLabel: string): void => {
-    const newTask = { label: taskLabel, code: tasks[selectedTask].code };
+    const newTask = { label: taskLabel, code: "" };
     const newTasks: Task[] = [...tasks, newTask];
     setTasks(newTasks);
   };

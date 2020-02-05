@@ -25,7 +25,7 @@ const CodeInput: React.FC<CodeInputProps> = (props: CodeInputProps) => {
   return (
     <CodeMirror
       className={className}
-      value={value}
+      value={task.code}
       options={{
         mode: "xml",
         theme: "material",
