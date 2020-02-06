@@ -9,15 +9,16 @@ require("codemirror/mode/javascript/javascript");
 interface CodeInputProps {
   className?: string;
   code: string;
-  changeTask: (name: string, task: Task) => void;
+  changeTask: (key: number, task: Task) => void;
   task: Task;
+  selectedTask: number;
 }
 
 const CodeInput: React.FC<CodeInputProps> = (props: CodeInputProps) => {
-  const { changeTask, task, className } = props;
+  const { changeTask, task, selectedTask, className } = props;
   const setCode = (code: string): void => {
     task.code = code;
-    changeTask("Task1", task);
+    changeTask(selectedTask + 1, task);
   };
 
   return (

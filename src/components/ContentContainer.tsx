@@ -1,21 +1,27 @@
 import React from "react";
-import { Task } from "../App";
+import { Task, Tasks } from "../App";
 import { CodeInput } from ".";
 
 interface ContentContainerProps {
   className?: string;
-  task: Task;
-  changeTask: (name: string, task: Task) => void;
+  tasks: Tasks;
+  selectedTask: number;
+  changeTask: (key: number, task: Task) => void;
 }
 
 const ContentContainer: React.FC<ContentContainerProps> = (
   props: ContentContainerProps
 ) => {
-  const { task, className, changeTask } = props;
+  const { tasks, selectedTask, className, changeTask } = props;
 
   return (
     <div className={className}>
-      <CodeInput code={task.code} changeTask={changeTask} task={task} />
+      <CodeInput
+        selectedTask={selectedTask}
+        code={tasks[selectedTask + 1].code}
+        changeTask={changeTask}
+        task={tasks[selectedTask + 1]}
+      />
     </div>
   );
 };

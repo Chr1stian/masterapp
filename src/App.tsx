@@ -36,19 +36,17 @@ export interface Task {
   code: string;
 }
 
-export interface Props {
-  Tasks?: {
-    [key: number]: Task;
-  };
+export interface Tasks {
+  [key: number]: Task;
 }
 
-const App: React.FC<Props> = (props: Props) => {
+const App: React.FC = () => {
   const classes = useStyles();
   // Handling of selection in drawer and tabs
   const [tabIndex, setTabIndex] = React.useState(0);
   const [selectedTask, setSelectedTask] = React.useState(0);
 
-  const [tasks, setTasks] = React.useState({
+  const [tasks, setTasks] = React.useState<Tasks>({
     1: { label: "test1", code: "testcode1" },
     2: { label: "test2", code: "testcode2" },
     3: { label: "test3", code: "testcode3" }
@@ -67,8 +65,8 @@ const App: React.FC<Props> = (props: Props) => {
   };
   */
 
-  const updateTask = (name: string, task: Task): void => {
-    setTasks(prevTasks => ({ ...prevTasks, [name]: task }));
+  const updateTask = (key: number, task: Task): void => {
+    setTasks(prevTasks => ({ ...prevTasks, [key]: task }));
   };
 
   const changeTab = (
@@ -93,7 +91,11 @@ const App: React.FC<Props> = (props: Props) => {
       />
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <ContentContainer task={tasks[1]} changeTask={updateTask} />
+        <ContentContainer
+          tasks={tasks}
+          changeTask={updateTask}
+          selectedTask={selectedTask}
+        />
       </main>
     </div>
   );

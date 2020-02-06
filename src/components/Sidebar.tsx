@@ -69,7 +69,7 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
               <ListItemIcon>
                 <MailIcon />
               </ListItemIcon>
-              <ListItemText primary={task[1].label + " " + task[1].code} />
+              <ListItemText primary={task[1].label + " " + index} />
             </MenuItem>
           ))}
         </List>
