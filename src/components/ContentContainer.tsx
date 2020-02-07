@@ -1,6 +1,6 @@
 import React from "react";
 import { Task, Tasks } from "../App";
-import { CodeInput } from ".";
+import { CodeInput, CodeOutput } from ".";
 
 interface ContentContainerProps {
   className?: string;
@@ -22,6 +22,7 @@ const ContentContainer: React.FC<ContentContainerProps> = (
         changeTask={changeTask}
         task={tasks[selectedTask + 1]}
       />
+      <CodeOutput task={tasks[selectedTask + 1]} />
     </div>
   );
 };
