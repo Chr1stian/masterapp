@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export interface Task {
   label: string;
-  items?: string[]; //React.Component
   code: string;
 }
 
