@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNodeArray } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import "./App.css";
 import { Sidebar, Tabbar, ContentContainer } from "./components";
@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface Task {
   label: string;
   code: string;
+  splitCode: ReactNodeArray;
 }
 
 export interface Tasks {
@@ -46,9 +47,9 @@ const App: React.FC = () => {
   const [selectedTask, setSelectedTask] = React.useState(0);
 
   const [tasks, setTasks] = React.useState<Tasks>({
-    1: { label: "test1", code: "testcode1" },
-    2: { label: "test2", code: "testcode2" },
-    3: { label: "test3", code: "testcode3" }
+    1: { label: "test1", code: "testcode1\nline 2", splitCode: [] },
+    2: { label: "test2", code: "testcode2\nline 2", splitCode: [] },
+    3: { label: "test3", code: "testcode3\nline 2", splitCode: [] }
   });
 
   /* Helper functions

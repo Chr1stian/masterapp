@@ -1,6 +1,15 @@
 import React from "react";
 import { Task } from "../App";
-import { makeStyles, createStyles } from "@material-ui/core";
+import {
+  makeStyles,
+  createStyles,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton
+} from "@material-ui/core";
+import CommentIcon from "@material-ui/icons/Comment";
 import reactStringReplace from "react-string-replace";
 
 const useStyles = makeStyles(() =>
@@ -16,50 +25,60 @@ const useStyles = makeStyles(() =>
 
 interface CodeOutputProps {
   task: Task;
+  changeTask: (key: number, task: Task) => void;
+  selectedTask: number;
 }
 
 const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
   const classes = useStyles();
-  const { task } = props;
+  const { task, changeTask, selectedTask } = props;
   const [selectedText, setSelectedText] = React.useState<undefined | string>(
     ""
   );
-  const [replacedCode, setReplacedCode] = React.useState();
 
   const handleMouseUp = (): void => {
     const selection = window.getSelection()
       ? window.getSelection()?.toString()
       : "";
-    console.log(window.getSelection()?.toString());
     if (window.getSelection()) {
       setSelectedText(selection);
     }
     // TODO: Handle when nothing is selected
   };
 
-  // Create button to change
-  const handleOnClick = (): void => {
-    console.log(selectedText);
-
+  const handleOnClick = (index: number, value: string): void => {
     const replacedString = reactStringReplace(
-      task.code,
+      value,
       selectedText,
-      (match: React.ReactNode, i: any) => (
-        <span className={classes.span}>{match}</span>
-      )
+      (match: string) => match
     );
-    console.log(replacedString);
-    setReplacedCode(replacedString);
+    task.splitCode[index] = replacedString;
+    changeTask(selectedTask + 1, task);
   };
-  // Figure out way to save code with gap and corresponding solution
 
   return (
     <div>
       <div className={classes.div} onMouseUp={handleMouseUp}>
-        {task.code}
+        <List>
+          {task.code.split("\n").map((value: string, index) => {
+            return (
+              <ListItem key={index} dense>
+                <ListItemText primary={value}></ListItemText>
+                <ListItemSecondaryAction>
+                  <IconButton
+                    edge="end"
+                    aria-label="comments"
+                    onClick={(): void => handleOnClick(index, value)}
+                  >
+                    <CommentIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            );
+          })}
+        </List>
       </div>
-      <button onClick={handleOnClick}>Split code</button>
-      <div>{replacedCode}</div>
+      <div>{task.splitCode?.toString()}</div>
     </div>
   );
 };
