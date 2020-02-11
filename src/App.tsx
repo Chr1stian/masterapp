@@ -52,19 +52,6 @@ const App: React.FC = () => {
     3: { label: "test3", code: "testcode3\nline 2", splitCode: [] }
   });
 
-  /* Helper functions
-  const addTask = (taskLabel: string): void => {
-    const newTask = { label: taskLabel, code: "" };
-    const newTasks: Task[] = [...tasks, newTask];
-    setTasks(newTasks);
-  };
-  const changeTask = (task: Task): void => {
-    const oldTasks = [...tasks];
-    oldTasks[selectedTask] = task;
-    setTasks(tasks);
-  };
-  */
-
   const updateTask = (key: number, task: Task): void => {
     setTasks(prevTasks => ({ ...prevTasks, [key]: task }));
   };
@@ -76,6 +63,10 @@ const App: React.FC = () => {
     setTabIndex(selectedTab);
   };
 
+  const handleExport = (): void => {
+    console.log(tasks);
+  };
+
   return (
     <div className={classes.root}>
       <Tabbar
@@ -84,6 +75,7 @@ const App: React.FC = () => {
         className={classes.appBar}
       />
       <Sidebar
+        handleExport={handleExport}
         Tasks={tasks}
         // addTask={addTask}
         selectedTask={selectedTask}

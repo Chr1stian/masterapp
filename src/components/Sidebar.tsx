@@ -22,6 +22,7 @@ interface SidebarProps {
   addTask?: (newTask: string) => void;
   selectedTask: number;
   setSelectedTask: (taskIndex: number) => void;
+  handleExport: () => void;
 }
 
 const drawerWidth = 200;
@@ -38,13 +39,16 @@ const useStyles = makeStyles((theme: Theme) =>
     taskButton: {
       width: drawerWidth,
       marginTop: "auto"
+    },
+    exportButton: {
+      zIndex: 1
     }
   })
 );
 
 const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
   const classes = useStyles();
-  const { Tasks, selectedTask, setSelectedTask } = props;
+  const { Tasks, selectedTask, setSelectedTask, handleExport } = props;
 
   return (
     <div>
@@ -56,7 +60,13 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
         }}
         anchor="left"
       >
-        <div className={classes.toolbar} />
+        <Button
+          className={classes.toolbar}
+          variant="contained"
+          onClick={handleExport}
+        >
+          Export
+        </Button>
         <Divider />
         <List>
           {Object.entries(Tasks).map((task, index) => (

@@ -11,15 +11,21 @@ const Tabbar: React.FC<TabbarProps> = (props: TabbarProps) => {
   const { tabIndex, changeTab, className } = props;
 
   return (
-    <AppBar className={className}>
-      <Toolbar>
-        <Tabs value={tabIndex} aria-label="task_steps_bar" onChange={changeTab}>
-          <Tab label="Item One" />
-          <Tab label="Item Two" />
-          <Tab label="Item Three" />
-        </Tabs>
-      </Toolbar>
-    </AppBar>
+    <div>
+      <AppBar className={className}>
+        <Toolbar>
+          <Tabs
+            value={tabIndex}
+            aria-label="task_steps_bar"
+            onChange={changeTab}
+          >
+            <Tab label="Item One" />
+            <Tab label="Item Two" />
+            <Tab label="Item Three" />
+          </Tabs>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 };
 
