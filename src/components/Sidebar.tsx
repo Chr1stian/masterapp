@@ -19,7 +19,7 @@ interface SidebarProps {
   Tasks: {
     [key: number]: Task;
   };
-  addTask?: (newTask: string) => void;
+  addTask: (key: number, newTask: Task) => void;
   selectedTask: number;
   setSelectedTask: (taskIndex: number) => void;
   handleExport: () => void;
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
   const classes = useStyles();
-  const { Tasks, selectedTask, setSelectedTask, handleExport } = props;
+  const { Tasks, selectedTask, setSelectedTask, handleExport, addTask } = props;
 
   return (
     <div>
@@ -85,7 +85,13 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
         </List>
         <Button
           className={classes.taskButton}
-          //onClick={(): void => addTask("Oppgave ")}
+          onClick={(): void =>
+            addTask(Object.keys(Tasks).length + 1, {
+              label: "test" + (Object.keys(Tasks).length + 1),
+              code: "",
+              splitCode: []
+            })
+          }
         >
           Add task
         </Button>

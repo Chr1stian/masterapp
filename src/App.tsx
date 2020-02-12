@@ -77,7 +77,7 @@ const App: React.FC = () => {
       <Sidebar
         handleExport={handleExport}
         Tasks={tasks}
-        // addTask={addTask}
+        addTask={updateTask}
         selectedTask={selectedTask}
         setSelectedTask={setSelectedTask}
       />

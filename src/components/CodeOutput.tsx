@@ -36,9 +36,9 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
     ""
   );
 
-  // React.useEffect(() => {
-  //   task.splitCode = task.code.split("\n");
-  // });
+  React.useEffect(() => {
+    task.splitCode = task.code.split("\n");
+  }, []);
 
   const handleMouseUp = (): void => {
     const selection = window.getSelection()
