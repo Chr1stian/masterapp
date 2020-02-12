@@ -7,18 +7,30 @@ import {
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
-  IconButton
+  IconButton,
+  Card
 } from "@material-ui/core";
 import CommentIcon from "@material-ui/icons/Comment";
 import reactStringReplace from "react-string-replace";
 
 const useStyles = makeStyles(() =>
   createStyles({
-    div: {
+    wrapper: {
+      display: "flex",
+      flexWrap: "nowrap",
+      flexDirection: "row"
+    },
+    container: {
       whiteSpace: "pre-wrap"
     },
     span: {
       color: "red"
+    },
+    list: {},
+    card: {
+      // flex: "0 0 1",
+      width: "25%",
+      alignSelf: "auto" // TODO: move to right?
     }
   })
 );
@@ -61,9 +73,9 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
   };
 
   return (
-    <div>
-      <div className={classes.div} onMouseUp={handleMouseUp}>
-        <List>
+    <div className={classes.wrapper}>
+      <div className={classes.container} onMouseUp={handleMouseUp}>
+        <List className={classes.list}>
           {task.code.split("\n").map((value: string, index) => {
             return (
               <ListItem key={index} dense>
@@ -82,7 +94,20 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
           })}
         </List>
       </div>
-      <div>{task.splitCode?.toString()}</div>
+      <Card className={classes.card}>
+        <List>
+          {task.splitCode.map((value: any, index: number) => {
+            return (
+              typeof value != "string" &&
+              value && (
+                <ListItem key={index} dense>
+                  <ListItemText primary={value[1]}></ListItemText>
+                </ListItem>
+              )
+            );
+          })}
+        </List>
+      </Card>
     </div>
   );
 };
