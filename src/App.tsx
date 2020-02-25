@@ -64,6 +64,11 @@ const App: React.FC = () => {
   };
 
   const handleExport = (): void => {
+    fetch("/api/task/pizza")
+      .then(response => response.text())
+      .then(response => {
+        console.log(response);
+      });
     console.log(tasks);
   };
 
