@@ -63,13 +63,22 @@ const App: React.FC = () => {
     setTabIndex(selectedTab);
   };
 
-  const handleExport = (): void => {
-    fetch("/api/task/pizza")
+  const handleExport = async (): Promise<void> => {
+    fetch("/api/tasks/" + JSON.stringify(tasks))
       .then(response => response.text())
       .then(response => {
         console.log(response);
       });
-    console.log(tasks);
+
+    await fetch("/api/tasks", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(tasks)
+    });
+    console.log(tasks[1]);
   };
 
   return (
