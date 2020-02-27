@@ -64,11 +64,13 @@ const App: React.FC = () => {
   };
 
   const handleExport = async (): Promise<void> => {
+    /*
     fetch("/api/tasks/" + JSON.stringify(tasks))
       .then(response => response.text())
       .then(response => {
         console.log(response);
       });
+      */
 
     await fetch("/api/tasks", {
       method: "POST",
@@ -76,9 +78,11 @@ const App: React.FC = () => {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(tasks)
-    });
-    console.log(tasks[1]);
+      body: JSON.stringify(tasks[1])
+    })
+      .then(response => response.text())
+      .then(response => console.log(response));
+    console.log(JSON.stringify(tasks));
   };
 
   return (
