@@ -72,13 +72,13 @@ const App: React.FC = () => {
       });
       */
 
-    await fetch("/api/tasks", {
+    await fetch("/api/test", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(tasks[1])
+      body: JSON.stringify(tasks)
     })
       .then(response => response.text())
       .then(response => console.log(response));
