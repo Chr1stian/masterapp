@@ -27,9 +27,9 @@ const ContentContainer: React.FC<ContentContainerProps> = (
     <div className={className}>
       <CodeInput
         selectedTask={selectedTask}
-        code={tasks[selectedTask + 1].code}
+        code={tasks[selectedTask].code}
         changeTask={changeTask}
-        task={tasks[selectedTask + 1]}
+        task={tasks[selectedTask]}
       />
       {/*
       <Button variant="contained" onClick={handleOnClick}>
@@ -37,7 +37,7 @@ const ContentContainer: React.FC<ContentContainerProps> = (
       </Button>
        */}
       <CodeOutput
-        task={tasks[selectedTask + 1]}
+        task={tasks[selectedTask]}
         selectedTask={selectedTask}
         changeTask={changeTask}
       />

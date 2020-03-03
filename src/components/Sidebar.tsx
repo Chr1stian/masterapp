@@ -19,7 +19,7 @@ interface SidebarProps {
   Tasks: {
     [key: number]: Task;
   };
-  addTask: (key: number, newTask: Task) => void;
+  addTask: (newTask: Task) => void;
   selectedTask: number;
   setSelectedTask: (taskIndex: number) => void;
   handleExport: () => void;
@@ -86,9 +86,9 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
         <Button
           className={classes.taskButton}
           onClick={(): void =>
-            addTask(Object.keys(Tasks).length + 1, {
+            addTask({
               label: "test" + (Object.keys(Tasks).length + 1),
-              code: "",
+              code: "lagt til med knapp",
               splitCode: []
             })
           }

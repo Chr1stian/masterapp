@@ -46,14 +46,21 @@ const App: React.FC = () => {
   const [tabIndex, setTabIndex] = React.useState(0);
   const [selectedTask, setSelectedTask] = React.useState(0);
 
-  const [tasks, setTasks] = React.useState<Tasks>({
-    1: { label: "test1", code: "testcode1\nline 2", splitCode: [] },
-    2: { label: "test2", code: "testcode2\nline 2", splitCode: [] },
-    3: { label: "test3", code: "testcode3\nline 2", splitCode: [] }
-  });
+  const [tasks, setTasks] = React.useState<Task[]>([
+    { label: "test1", code: "testcode1\nline 2", splitCode: [] },
+    { label: "test2", code: "testcode2\nline 2", splitCode: [] },
+    { label: "test3", code: "testcode3\nline 2", splitCode: [] }
+  ]);
 
   const updateTask = (key: number, task: Task): void => {
-    setTasks(prevTasks => ({ ...prevTasks, [key]: task }));
+    const newTasks = [...tasks];
+    newTasks[key] = task;
+    setTasks(newTasks);
+  };
+
+  const addTask = (task: Task): void => {
+    const newTasks = [...tasks, task];
+    setTasks(newTasks);
   };
 
   const changeTab = (
@@ -78,7 +85,7 @@ const App: React.FC = () => {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(tasks)
+      body: JSON.stringify(tasks[0])
     })
       .then(response => response.text())
       .then(response => console.log(response));
@@ -95,7 +102,7 @@ const App: React.FC = () => {
       <Sidebar
         handleExport={handleExport}
         Tasks={tasks}
-        addTask={updateTask}
+        addTask={addTask}
         selectedTask={selectedTask}
         setSelectedTask={setSelectedTask}
       />
