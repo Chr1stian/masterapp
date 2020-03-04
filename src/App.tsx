@@ -2,6 +2,7 @@ import React, { ReactNodeArray } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import "./App.css";
 import { Sidebar, Tabbar, ContentContainer } from "./components";
+import { saveAs } from "file-saver";
 
 const drawerWidth = 200;
 
@@ -71,14 +72,13 @@ const App: React.FC = () => {
   };
 
   const handleExport = async (): Promise<void> => {
+    fetch("/api/zip-download?name=README.md&name=HELP.md").then(
+      async response => {
+        const blob = await response.blob();
+        saveAs(blob, "testfil.zip");
+      }
+    );
     /*
-    fetch("/api/tasks/" + JSON.stringify(tasks))
-      .then(response => response.text())
-      .then(response => {
-        console.log(response);
-      });
-      */
-
     await fetch("/api/test", {
       method: "POST",
       headers: {
@@ -90,6 +90,7 @@ const App: React.FC = () => {
       .then(response => response.text())
       .then(response => console.log(response));
     console.log(JSON.stringify(tasks));
+    */
   };
 
   return (
