@@ -34,7 +34,7 @@ const CodeInput: React.FC<CodeInputProps> = (props: CodeInputProps) => {
         setCode(value);
       }}
       onChange={(): void => {
-        console.log("code:", task.code);
+        // console.log("code:", task.code);
       }}
     />
   );

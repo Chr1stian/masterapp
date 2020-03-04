@@ -72,12 +72,17 @@ const App: React.FC = () => {
   };
 
   const handleExport = async (): Promise<void> => {
-    fetch("/api/zip-download?name=README.md&name=HELP.md").then(
-      async response => {
-        const blob = await response.blob();
-        saveAs(blob, "testfil.zip");
-      }
-    );
+    fetch("/api/zip-download?name=README.md&name=HELP.md", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(tasks[0])
+    }).then(async response => {
+      const blob = await response.blob();
+      saveAs(blob, "testfil.zip");
+    });
+    console.log(JSON.stringify(tasks[0]));
     /*
     await fetch("/api/test", {
       method: "POST",
@@ -89,7 +94,7 @@ const App: React.FC = () => {
     })
       .then(response => response.text())
       .then(response => console.log(response));
-    console.log(JSON.stringify(tasks));
+    
     */
   };
 
