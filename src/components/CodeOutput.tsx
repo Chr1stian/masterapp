@@ -49,7 +49,12 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
   );
 
   React.useEffect(() => {
-    task.splitCode = task.code.split("\n");
+    const newSplitCode = [...task.splitCode];
+    const split = task.code.split("\n");
+    split.forEach(element => {
+      newSplitCode.push([element]);
+    });
+    task.splitCode = newSplitCode;
   }, []);
 
   const handleMouseUp = (): void => {

@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface Task {
   label: string;
   code: string;
-  splitCode: ReactNodeArray;
+  splitCode: ReactNodeArray[];
 }
 
 export interface Tasks {
