@@ -8,7 +8,9 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
-  Card
+  Card,
+  Typography,
+  CardContent
 } from "@material-ui/core";
 import CommentIcon from "@material-ui/icons/Comment";
 import reactStringReplace from "react-string-replace";
@@ -55,7 +57,7 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
       newSplitCode.push([element]);
     });
     task.splitCode = newSplitCode;
-  }, []);
+  }, [task]);
 
   const handleMouseUp = (): void => {
     const selection = window.getSelection()
@@ -74,12 +76,19 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
       (match: string) => match
     );
     task.splitCode[index] = replacedString;
-    changeTask(selectedTask + 1, task);
+    changeTask(selectedTask, task);
   };
 
   return (
     <div className={classes.wrapper}>
       <div className={classes.container} onMouseUp={handleMouseUp}>
+        <Card variant="outlined">
+          <CardContent>
+            <Typography variant="h5" component="h2">
+              Mark text/code and press cut to extract selection
+            </Typography>
+          </CardContent>
+        </Card>
         <List className={classes.list}>
           {task.code.split("\n").map((value: string, index) => {
             return (

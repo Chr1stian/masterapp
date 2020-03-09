@@ -21,7 +21,7 @@ const CodeInput: React.FC<CodeInputProps> = (props: CodeInputProps) => {
   const { changeTask, task, selectedTask, className } = props;
   const setCode = (code: string): void => {
     task.code = code;
-    changeTask(selectedTask + 1, task);
+    changeTask(selectedTask, task);
   };
 
   const [language, setLanguage] = React.useState("javascript");
