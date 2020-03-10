@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNodeArray } from "react";
 import { Task } from "../App";
 import {
   makeStyles,
@@ -10,7 +10,8 @@ import {
   IconButton,
   Card,
   Typography,
-  CardContent
+  CardContent,
+  Button
 } from "@material-ui/core";
 import CommentIcon from "@material-ui/icons/Comment";
 import reactStringReplace from "react-string-replace";
@@ -50,14 +51,27 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
     ""
   );
 
+  // Update component when code is changed
   React.useEffect(() => {
-    const newSplitCode = [...task.splitCode];
+    // const newSplitCode = [...task.splitCode];
+    const newSplitCode: ReactNodeArray[] = [];
+    const split = task.code.split("\n");
+    console.log("useEffect, splitCode: ", newSplitCode);
+    split.forEach(element => {
+      newSplitCode.push([element]);
+    });
+    task.splitCode = newSplitCode;
+  }, [task.code]);
+
+  // Populate component on mount
+  React.useEffect(() => {
+    const newSplitCode: ReactNodeArray[] = [];
     const split = task.code.split("\n");
     split.forEach(element => {
       newSplitCode.push([element]);
     });
     task.splitCode = newSplitCode;
-  }, [task]);
+  }, []);
 
   const handleMouseUp = (): void => {
     const selection = window.getSelection()
@@ -81,6 +95,11 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
 
   return (
     <div className={classes.wrapper}>
+      <Button
+        onClick={() => {
+          console.log(task.splitCode);
+        }}
+      ></Button>
       <div className={classes.container} onMouseUp={handleMouseUp}>
         <Card variant="outlined">
           <CardContent>
@@ -90,10 +109,17 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
           </CardContent>
         </Card>
         <List className={classes.list}>
-          {task.code.split("\n").map((value: string, index) => {
+          {task.splitCode.map((value: any, index: number) => {
             return (
               <ListItem key={index} dense>
-                <ListItemText primary={value}></ListItemText>
+                {value.length === 1 && (
+                  <ListItemText primary={value}></ListItemText>
+                )}
+                {value.length !== 1 && (
+                  <ListItemText
+                    primary={value[0] + " ".repeat(value[1].length) + value[2]}
+                  ></ListItemText>
+                )}
                 <ListItemSecondaryAction>
                   <IconButton
                     edge="end"
@@ -112,7 +138,7 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
         <List>
           {task.splitCode.map((value: any, index: number) => {
             return (
-              typeof value != "string" &&
+              typeof value !== "string" &&
               value && (
                 <ListItem key={index} dense>
                   <ListItemText primary={value[1]}></ListItemText>
