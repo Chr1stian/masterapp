@@ -3,5 +3,17 @@ import CodeOutput from "./CodeOutput";
 import ContentContainer from "./ContentContainer";
 import Sidebar from "./Sidebar";
 import Tabbar from "./Tabbar";
+import CodeOutputGaps from "./CodeOutputGaps";
+import CodeOutputView from "./CodeOutputView";
+import DirectionCard from "./DirectionCard";
 
-export { CodeInput, CodeOutput, ContentContainer, Sidebar, Tabbar };
+export {
+  CodeInput,
+  CodeOutput,
+  ContentContainer,
+  Sidebar,
+  Tabbar,
+  CodeOutputGaps,
+  CodeOutputView,
+  DirectionCard
+};

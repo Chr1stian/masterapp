@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Task, Tasks } from "../App";
 import { CodeInput, CodeOutput } from ".";
 // import { Button } from "@material-ui/core";
