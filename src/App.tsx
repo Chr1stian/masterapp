@@ -48,9 +48,21 @@ const App: React.FC = () => {
   const [selectedTask, setSelectedTask] = React.useState(0);
 
   const [tasks, setTasks] = React.useState<Task[]>([
-    { label: "test1", code: "testcode1\nline 2", splitCode: [] },
-    { label: "test2", code: "testcode2\nline 2", splitCode: [] },
-    { label: "test3", code: "testcode3\nline 2", splitCode: [] }
+    {
+      label: "test1",
+      code: "testcode1\nline 2",
+      splitCode: [["testcode1"], ["line 2"]]
+    },
+    {
+      label: "test2",
+      code: "testcode2\nline 2",
+      splitCode: [["testcode2"], ["line 2"]]
+    },
+    {
+      label: "test3",
+      code: "testcode3\nline 2",
+      splitCode: [["testcode3"], ["line 2"]]
+    }
   ]);
 
   const updateTask = (key: number, task: Task): void => {
@@ -115,6 +127,7 @@ const App: React.FC = () => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <ContentContainer
+          tabIndex={tabIndex}
           tasks={tasks}
           changeTask={updateTask}
           selectedTask={selectedTask}

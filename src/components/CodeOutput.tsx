@@ -58,28 +58,6 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
     ""
   );
 
-  // Update component when code is changed
-  React.useEffect(() => {
-    // const newSplitCode = [...task.splitCode];
-    const newSplitCode: ReactNodeArray[] = [];
-    const split = task.code.split("\n");
-    console.log("useEffect, splitCode: ", newSplitCode);
-    split.forEach(element => {
-      newSplitCode.push([element]);
-    });
-    task.splitCode = newSplitCode;
-  }, [task.code]);
-
-  // Populate component on mount
-  React.useEffect(() => {
-    const newSplitCode: ReactNodeArray[] = [];
-    const split = task.code.split("\n");
-    split.forEach(element => {
-      newSplitCode.push([element]);
-    });
-    task.splitCode = newSplitCode;
-  }, []);
-
   const handleMouseUp = (): void => {
     const selection = window.getSelection()
       ? window.getSelection()?.toString()

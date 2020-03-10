@@ -21,6 +21,12 @@ const CodeInput: React.FC<CodeInputProps> = (props: CodeInputProps) => {
   const { changeTask, task, selectedTask, className } = props;
   const setCode = (code: string): void => {
     task.code = code;
+    const newSplitCode: React.ReactNodeArray[] = [];
+    const split = task.code.split("\n");
+    split.forEach(element => {
+      newSplitCode.push([element]);
+    });
+    task.splitCode = newSplitCode;
     changeTask(selectedTask, task);
   };
 
