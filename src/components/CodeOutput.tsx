@@ -28,7 +28,7 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
   return (
     <div className={classes.wrapper}>
       <DirectionCard
-        text={"Highlight text/code to be cut and press the scissors icon"}
+        text={"Highlight text/code to be cut and press the crop icon"}
       ></DirectionCard>
       <CodeOutputGaps task={task} />
       <CodeOutputView

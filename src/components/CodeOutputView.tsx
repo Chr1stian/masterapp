@@ -10,10 +10,9 @@ import {
   IconButton,
   Card,
   Typography,
-  CardContent,
-  Button
+  CardContent
 } from "@material-ui/core";
-import CommentIcon from "@material-ui/icons/Comment";
+import CropIcon from "@material-ui/icons/Crop";
 import reactStringReplace from "react-string-replace";
 
 const useStyles = makeStyles(() =>
@@ -120,7 +119,7 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
                     aria-label="comments"
                     onClick={(): void => handleOnClick(index, value)}
                   >
-                    <CommentIcon />
+                    <CropIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
