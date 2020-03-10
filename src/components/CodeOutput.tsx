@@ -34,6 +34,13 @@ const useStyles = makeStyles(() =>
       // flex: "0 0 1",
       width: "25%",
       alignSelf: "auto" // TODO: move to right?
+    },
+    cardContent: {
+      display: "flex",
+      flexDirection: "row"
+    },
+    gap: {
+      width: "100px"
     }
   })
 );
@@ -117,7 +124,18 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
                 )}
                 {value.length !== 1 && (
                   <ListItemText
-                    primary={value[0] + " ".repeat(value[1].length) + value[2]}
+                    primary={
+                      <Card>
+                        <CardContent className={classes.cardContent}>
+                          <Typography>{value[0]}</Typography>
+                          <Card
+                            className={classes.gap}
+                            variant="outlined"
+                          ></Card>
+                          <Typography>{value[2]}</Typography>
+                        </CardContent>
+                      </Card>
+                    }
                   ></ListItemText>
                 )}
                 <ListItemSecondaryAction>
