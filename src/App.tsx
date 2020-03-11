@@ -49,17 +49,17 @@ const App: React.FC = () => {
 
   const [tasks, setTasks] = React.useState<Task[]>([
     {
-      label: "test1",
+      label: "Task 1",
       code: "testcode1\nline 2",
       splitCode: [["testcode1"], ["line 2"]]
     },
     {
-      label: "test2",
+      label: "Task 2",
       code: "testcode2\nline 2",
       splitCode: [["testcode2"], ["line 2"]]
     },
     {
-      label: "test3",
+      label: "Task 3",
       code: "testcode3\nline 2",
       splitCode: [["testcode3"], ["line 2"]]
     }

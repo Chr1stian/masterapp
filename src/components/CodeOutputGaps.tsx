@@ -9,6 +9,7 @@ const useStyles = makeStyles(() =>
     card: {
       display: "flex",
       flexDirection: "row",
+      flexWrap: "wrap",
       margin: "5px",
       padding: "5px"
     },

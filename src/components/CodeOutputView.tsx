@@ -5,7 +5,6 @@ import {
   createStyles,
   List,
   ListItem,
-  ListItemText,
   ListItemSecondaryAction,
   IconButton,
   Card,
@@ -58,23 +57,22 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
   );
 
   const handleMouseUp = (): void => {
-    const selection = window.getSelection()
-      ? window.getSelection()?.toString()
-      : "";
+    const selection = window.getSelection()?.toString();
     if (window.getSelection()) {
       setSelectedText(selection);
     }
-    // TODO: Handle when nothing is selected
   };
 
   const handleOnClick = (index: number, value: string): void => {
-    const replacedString = reactStringReplace(
-      value,
-      selectedText,
-      (match: string) => match
-    );
-    task.splitCode[index] = replacedString;
-    changeTask(selectedTask, task);
+    if (selectedText) {
+      const replacedString = reactStringReplace(
+        value,
+        selectedText,
+        (match: string) => match
+      );
+      task.splitCode[index] = replacedString;
+      changeTask(selectedTask, task);
+    }
   };
 
   return (

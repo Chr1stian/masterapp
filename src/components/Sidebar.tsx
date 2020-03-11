@@ -79,7 +79,7 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
               <ListItemIcon>
                 <MailIcon />
               </ListItemIcon>
-              <ListItemText primary={task[1].label + " " + index} />
+              <ListItemText primary={task[1].label} />
             </MenuItem>
           ))}
         </List>
@@ -87,8 +87,8 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
           className={classes.taskButton}
           onClick={(): void =>
             addTask({
-              label: "test" + (Object.keys(Tasks).length + 1),
-              code: "lagt til med knapp",
+              label: "Task " + (Object.keys(Tasks).length + 1),
+              code: "",
               splitCode: []
             })
           }
