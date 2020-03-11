@@ -16,10 +16,13 @@ import MailIcon from "@material-ui/icons/Mail";
 import { Task } from "../App";
 
 interface SidebarProps {
-  tasks: Task[];
-  addTask: (newTask: string) => void;
+  Tasks: {
+    [key: number]: Task;
+  };
+  addTask: (newTask: Task) => void;
   selectedTask: number;
   setSelectedTask: (taskIndex: number) => void;
+  handleExport: () => void;
 }
 
 const drawerWidth = 200;
@@ -36,13 +39,16 @@ const useStyles = makeStyles((theme: Theme) =>
     taskButton: {
       width: drawerWidth,
       marginTop: "auto"
+    },
+    exportButton: {
+      zIndex: 1
     }
   })
 );
 
 const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
   const classes = useStyles();
-  const { tasks, addTask, selectedTask, setSelectedTask } = props;
+  const { Tasks, selectedTask, setSelectedTask, handleExport, addTask } = props;
 
   return (
     <div>
@@ -54,10 +60,16 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
         }}
         anchor="left"
       >
-        <div className={classes.toolbar} />
+        <Button
+          className={classes.toolbar}
+          variant="contained"
+          onClick={handleExport}
+        >
+          Export
+        </Button>
         <Divider />
         <List>
-          {tasks.map((task, index) => (
+          {Object.entries(Tasks).map((task, index) => (
             <MenuItem
               button
               key={index}
@@ -67,13 +79,19 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
               <ListItemIcon>
                 <MailIcon />
               </ListItemIcon>
-              <ListItemText primary={task.label + " " + (index + 1)} />
+              <ListItemText primary={task[1].label} />
             </MenuItem>
           ))}
         </List>
         <Button
           className={classes.taskButton}
-          onClick={(): void => addTask("Oppgave ")}
+          onClick={(): void =>
+            addTask({
+              label: "Task " + (Object.keys(Tasks).length + 1),
+              code: "",
+              splitCode: []
+            })
+          }
         >
           Add task
         </Button>

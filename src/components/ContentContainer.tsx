@@ -1,21 +1,38 @@
 import React from "react";
-import { Task } from "../App";
-import { CodeInput } from ".";
+import { Task, Tasks } from "../App";
+import { CodeInput, CodeOutput } from ".";
+// import { Button } from "@material-ui/core";
 
 interface ContentContainerProps {
   className?: string;
-  task: Task;
-  changeTask: (task: Task) => void;
+  tasks: Tasks;
+  selectedTask: number;
+  changeTask: (key: number, task: Task) => void;
+  tabIndex: number;
 }
 
 const ContentContainer: React.FC<ContentContainerProps> = (
   props: ContentContainerProps
 ) => {
-  const { task, className, changeTask } = props;
+  const { tasks, selectedTask, className, changeTask, tabIndex } = props;
 
   return (
     <div className={className}>
-      <CodeInput code={task.code} changeTask={changeTask} task={task} />
+      {tabIndex === 0 && (
+        <CodeInput
+          selectedTask={selectedTask}
+          code={tasks[selectedTask].code}
+          changeTask={changeTask}
+          task={tasks[selectedTask]}
+        />
+      )}
+      {tabIndex === 1 && (
+        <CodeOutput
+          task={tasks[selectedTask]}
+          selectedTask={selectedTask}
+          changeTask={changeTask}
+        />
+      )}
     </div>
   );
 };

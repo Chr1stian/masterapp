@@ -1,7 +1,8 @@
-import React from "react";
+import React, { ReactNodeArray } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import "./App.css";
 import { Sidebar, Tabbar, ContentContainer } from "./components";
+import { saveAs } from "file-saver";
 
 const drawerWidth = 200;
 
@@ -32,8 +33,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export interface Task {
   label: string;
-  items?: string[]; //React.Component
   code: string;
+  splitCode: ReactNodeArray[];
+}
+
+export interface Tasks {
+  [key: number]: Task;
 }
 
 const App: React.FC = () => {
@@ -43,18 +48,32 @@ const App: React.FC = () => {
   const [selectedTask, setSelectedTask] = React.useState(0);
 
   const [tasks, setTasks] = React.useState<Task[]>([
-    { label: "Test", code: "<h1>I hate xml</h1>" }
+    {
+      label: "Task 1",
+      code: "testcode1\nline 2",
+      splitCode: [["testcode1"], ["line 2"]]
+    },
+    {
+      label: "Task 2",
+      code: "testcode2\nline 2",
+      splitCode: [["testcode2"], ["line 2"]]
+    },
+    {
+      label: "Task 3",
+      code: "testcode3\nline 2",
+      splitCode: [["testcode3"], ["line 2"]]
+    }
   ]);
-  // Helper functions
-  const addTask = (taskLabel: string): void => {
-    const newTask = { label: taskLabel, code: "" };
-    const newTasks: Task[] = [...tasks, newTask];
+
+  const updateTask = (key: number, task: Task): void => {
+    const newTasks = [...tasks];
+    newTasks[key] = task;
     setTasks(newTasks);
   };
-  const changeTask = (task: Task): void => {
-    const oldTasks = [...tasks];
-    oldTasks[selectedTask] = task;
-    setTasks(tasks);
+
+  const addTask = (task: Task): void => {
+    const newTasks = [...tasks, task];
+    setTasks(newTasks);
   };
 
   const changeTab = (
@@ -62,6 +81,33 @@ const App: React.FC = () => {
     selectedTab: number
   ): void => {
     setTabIndex(selectedTab);
+  };
+
+  const handleExport = async (): Promise<void> => {
+    fetch("/api/zip-download?name=README.md&name=HELP.md", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(tasks[0])
+    }).then(async response => {
+      const blob = await response.blob();
+      saveAs(blob, "testfil.zip");
+    });
+    console.log(JSON.stringify(tasks[0]));
+    /*
+    await fetch("/api/test", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(tasks[0])
+    })
+      .then(response => response.text())
+      .then(response => console.log(response));
+    
+    */
   };
 
   return (
@@ -72,14 +118,20 @@ const App: React.FC = () => {
         className={classes.appBar}
       />
       <Sidebar
-        tasks={tasks}
+        handleExport={handleExport}
+        Tasks={tasks}
         addTask={addTask}
         selectedTask={selectedTask}
         setSelectedTask={setSelectedTask}
       />
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <ContentContainer task={tasks[selectedTask]} changeTask={changeTask} />
+        <ContentContainer
+          tabIndex={tabIndex}
+          tasks={tasks}
+          changeTask={updateTask}
+          selectedTask={selectedTask}
+        />
       </main>
     </div>
   );
