@@ -36,7 +36,8 @@ const useStyles = makeStyles(() =>
       flexDirection: "row"
     },
     gap: {
-      width: "100px"
+      width: "100px",
+      borderStyle: "dashed"
     }
   })
 );
