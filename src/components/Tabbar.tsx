@@ -19,9 +19,8 @@ const Tabbar: React.FC<TabbarProps> = (props: TabbarProps) => {
             aria-label="task_steps_bar"
             onChange={changeTab}
           >
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" />
+            <Tab label="Step One" />
+            <Tab label="Step Two" />
           </Tabs>
         </Toolbar>
       </AppBar>

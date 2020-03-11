@@ -10,6 +10,7 @@ const useStyles = makeStyles(() =>
       display: "flex",
       flexDirection: "row",
       flexWrap: "wrap",
+      minHeight: "26px",
       margin: "5px",
       padding: "5px"
     },

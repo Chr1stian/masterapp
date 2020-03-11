@@ -3,6 +3,7 @@ import { Controlled as CodeMirror } from "react-codemirror2";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 import { Task } from "../App";
+import DirectionCard from "./DirectionCard";
 import { Select, MenuItem } from "@material-ui/core";
 require("codemirror/mode/xml/xml");
 require("codemirror/mode/javascript/javascript");
@@ -37,6 +38,7 @@ const CodeInput: React.FC<CodeInputProps> = (props: CodeInputProps) => {
 
   return (
     <div>
+      <DirectionCard text={"Paste or write your code here"}></DirectionCard>
       <Select value={language} onChange={handleChange}>
         <MenuItem value={"javascript"}>JavaScript</MenuItem>
         <MenuItem value={"python"}>Python</MenuItem>
