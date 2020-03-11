@@ -6,7 +6,9 @@ import {
   List,
   ListItem,
   ListItemText,
-  Card
+  Card,
+  CardContent,
+  Typography
 } from "@material-ui/core";
 
 const useStyles = makeStyles(() =>
@@ -19,19 +21,8 @@ const useStyles = makeStyles(() =>
     container: {
       whiteSpace: "pre-wrap"
     },
-    span: {
-      color: "red"
-    },
-    list: {},
-    card: {
-      // flex: "0 0 1",
-      width: "25%",
-      alignSelf: "auto" // TODO: move to right?
-    },
-    cardContent: {
-      display: "flex",
-      flexDirection: "row"
-    },
+    card: {},
+    list: { display: "flex", flexDirection: "row" },
     gap: {
       width: "100px"
     }
@@ -51,13 +42,21 @@ const CodeOutputGaps: React.FC<CodeOutputGapsProps> = (
   return (
     <div className={classes.wrapper}>
       <Card className={classes.card}>
-        <List>
+        <List className={classes.list}>
           {task.splitCode.map((value: any, index: number) => {
             return (
               typeof value !== "string" &&
-              value && (
+              value[1] && (
                 <ListItem key={index} dense>
-                  <ListItemText primary={value[1]}></ListItemText>
+                  <ListItemText
+                    primary={
+                      <Card className={classes.gap} variant="outlined">
+                        <CardContent>
+                          <Typography>{value[1]}</Typography>
+                        </CardContent>
+                      </Card>
+                    }
+                  ></ListItemText>
                 </ListItem>
               )
             );
