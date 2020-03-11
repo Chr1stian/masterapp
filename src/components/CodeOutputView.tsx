@@ -9,8 +9,7 @@ import {
   ListItemSecondaryAction,
   IconButton,
   Card,
-  Typography,
-  CardContent
+  Typography
 } from "@material-ui/core";
 import CropIcon from "@material-ui/icons/Crop";
 import reactStringReplace from "react-string-replace";
@@ -30,9 +29,8 @@ const useStyles = makeStyles(() =>
     },
     list: {},
     card: {
-      // flex: "0 0 1",
       width: "25%",
-      alignSelf: "auto" // TODO: move to right?
+      alignSelf: "auto"
     },
     cardContent: {
       display: "flex",
@@ -86,32 +84,13 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
           {task.splitCode.map((value: any, index: number) => {
             return (
               <ListItem key={index} dense>
-                {value.length === 1 && (
-                  <ListItemText
-                    primary={
-                      <Card>
-                        <CardContent>
-                          <Typography>{value}</Typography>
-                        </CardContent>
-                      </Card>
-                    }
-                  ></ListItemText>
-                )}
+                {value.length === 1 && <Typography>{value}</Typography>}
                 {value.length !== 1 && (
-                  <ListItemText
-                    primary={
-                      <Card>
-                        <CardContent className={classes.cardContent}>
-                          <Typography>{value[0]}</Typography>
-                          <Card
-                            className={classes.gap}
-                            variant="outlined"
-                          ></Card>
-                          <Typography>{value[2]}</Typography>
-                        </CardContent>
-                      </Card>
-                    }
-                  ></ListItemText>
+                  <div className={classes.cardContent}>
+                    <Typography>{value[0]}</Typography>
+                    <Card className={classes.gap} variant="outlined"></Card>
+                    <Typography>{value[2]}</Typography>
+                  </div>
                 )}
                 <ListItemSecondaryAction>
                   <IconButton

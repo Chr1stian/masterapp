@@ -13,16 +13,20 @@ import {
 
 const useStyles = makeStyles(() =>
   createStyles({
-    wrapper: {
+    wrapper: {},
+    container: {},
+    card: {},
+    cardContent: {
       display: "flex",
-      flexWrap: "nowrap",
       flexDirection: "row"
     },
-    container: {
-      whiteSpace: "pre-wrap"
+    list: {
+      display: "flex",
+      flexDirection: "row"
     },
-    card: {},
-    list: { display: "flex", flexDirection: "row" },
+    listItemText: {
+      height: "30px"
+    },
     gap: {
       width: "100px"
     }
@@ -42,26 +46,20 @@ const CodeOutputGaps: React.FC<CodeOutputGapsProps> = (
   return (
     <div className={classes.wrapper}>
       <Card className={classes.card}>
-        <List className={classes.list}>
-          {task.splitCode.map((value: any, index: number) => {
-            return (
-              typeof value !== "string" &&
-              value[1] && (
-                <ListItem key={index} dense>
-                  <ListItemText
-                    primary={
-                      <Card className={classes.gap} variant="outlined">
-                        <CardContent>
-                          <Typography>{value[1]}</Typography>
-                        </CardContent>
-                      </Card>
-                    }
-                  ></ListItemText>
-                </ListItem>
-              )
-            );
-          })}
-        </List>
+        {task.splitCode.map((value: any) => {
+          return (
+            typeof value !== "string" &&
+            value[1] && (
+              <div className={classes.cardContent}>
+                <Card className={classes.gap} variant="outlined">
+                  <CardContent>
+                    <Typography>{value[1]}</Typography>
+                  </CardContent>
+                </Card>
+              </div>
+            )
+          );
+        })}
       </Card>
     </div>
   );
