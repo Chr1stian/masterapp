@@ -1,34 +1,25 @@
 import React from "react";
 import { Task } from "../App";
-import {
-  makeStyles,
-  createStyles,
-  List,
-  ListItem,
-  ListItemText,
-  Card,
-  CardContent,
-  Typography
-} from "@material-ui/core";
+import { makeStyles, createStyles, Card, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(() =>
   createStyles({
     wrapper: {},
     container: {},
-    card: {},
-    cardContent: {
+    card: {
       display: "flex",
-      flexDirection: "row"
+      flexDirection: "row",
+      margin: "5px",
+      padding: "5px"
     },
-    list: {
-      display: "flex",
-      flexDirection: "row"
-    },
-    listItemText: {
-      height: "30px"
-    },
+    cardContent: {},
     gap: {
-      width: "100px"
+      width: "100px",
+      height: "20px",
+      margin: "2px"
+    },
+    typography: {
+      textAlign: "center"
     }
   })
 );
@@ -52,9 +43,9 @@ const CodeOutputGaps: React.FC<CodeOutputGapsProps> = (
             value[1] && (
               <div className={classes.cardContent}>
                 <Card className={classes.gap} variant="outlined">
-                  <CardContent>
-                    <Typography>{value[1]}</Typography>
-                  </CardContent>
+                  <Typography className={classes.typography}>
+                    {value[1]}
+                  </Typography>
                 </Card>
               </div>
             )
