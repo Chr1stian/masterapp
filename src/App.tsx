@@ -84,7 +84,7 @@ const App: React.FC = () => {
   };
 
   const handleExport = async (): Promise<void> => {
-    fetch("/api/zip-download?name=README.md&name=HELP.md", {
+    fetch("/api/zip-download?name=ID_54414916-item.xml&name=imsmanifest.xml", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
