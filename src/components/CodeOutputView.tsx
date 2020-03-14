@@ -58,7 +58,9 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
   };
 
   const handleOnClick = (index: number, value: string): void => {
-    if (selectedText) {
+    if (task.splitCode[index].length === 3) {
+      alert("Can only split once per line");
+    } else if (selectedText) {
       const replacedString = reactStringReplace(
         value,
         selectedText,
