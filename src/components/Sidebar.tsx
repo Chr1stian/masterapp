@@ -12,7 +12,7 @@ import {
   Theme
 } from "@material-ui/core";
 
-import MailIcon from "@material-ui/icons/Mail";
+import FormatIndentIncreaseIcon from "@material-ui/icons/FormatIndentIncrease";
 import { Task } from "../App";
 import AddTaskDialog from "./AddTaskDialog";
 
@@ -76,7 +76,7 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
               onClick={(): void => setSelectedTask(index)}
             >
               <ListItemIcon>
-                <MailIcon />
+                <FormatIndentIncreaseIcon />
               </ListItemIcon>
               <ListItemText primary={task[1].label} />
             </MenuItem>

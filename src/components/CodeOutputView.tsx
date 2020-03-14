@@ -15,18 +15,9 @@ import reactStringReplace from "react-string-replace";
 
 const useStyles = makeStyles(() =>
   createStyles({
-    wrapper: {
-      display: "flex",
-      flexWrap: "nowrap",
-      flexDirection: "row"
-    },
-    container: {
-      whiteSpace: "pre-wrap"
-    },
-    span: {
-      color: "red"
-    },
-    list: {},
+    wrapper: {},
+    container: {},
+    list: { width: "100%" },
     card: {
       width: "25%",
       alignSelf: "auto"
@@ -37,7 +28,9 @@ const useStyles = makeStyles(() =>
     },
     gap: {
       width: "100px",
-      borderStyle: "dashed"
+      borderStyle: "dashed",
+      marginLeft: "5px",
+      marginRight: "5px"
     }
   })
 );

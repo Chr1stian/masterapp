@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNodeArray } from "react";
 import { Task } from "../App";
 import { makeStyles, createStyles, Card, Typography } from "@material-ui/core";
 
@@ -17,7 +17,6 @@ const useStyles = makeStyles(() =>
     cardContent: {},
     gap: {
       width: "100px",
-      height: "20px",
       margin: "2px"
     },
     typography: {
@@ -39,7 +38,7 @@ const CodeOutputGaps: React.FC<CodeOutputGapsProps> = (
   return (
     <div className={classes.wrapper}>
       <Card className={classes.card}>
-        {task.splitCode.map((value: any) => {
+        {task.splitCode.map((value: ReactNodeArray) => {
           return (
             typeof value !== "string" &&
             value[1] && (
