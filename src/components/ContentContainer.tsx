@@ -1,11 +1,10 @@
 import React from "react";
-import { Task, Tasks } from "../App";
+import { Task } from "../App";
 import { CodeInput, CodeOutput } from ".";
-// import { Button } from "@material-ui/core";
 
 interface ContentContainerProps {
   className?: string;
-  tasks: Tasks;
+  tasks: Task[];
   selectedTask: number;
   changeTask: (key: number, task: Task) => void;
   tabIndex: number;

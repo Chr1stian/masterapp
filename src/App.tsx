@@ -37,10 +37,6 @@ export interface Task {
   splitCode: ReactNodeArray[];
 }
 
-export interface Tasks {
-  [key: number]: Task;
-}
-
 const App: React.FC = () => {
   const classes = useStyles();
   // Handling of selection in drawer and tabs
@@ -84,7 +80,7 @@ const App: React.FC = () => {
   };
 
   const handleExport = async (): Promise<void> => {
-    fetch("/api/zip-download?name=ID_54414916-item.xml&name=imsmanifest.xml", {
+    fetch("/api/zip-download", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -95,19 +91,6 @@ const App: React.FC = () => {
       saveAs(blob, "testfil.zip");
     });
     console.log(JSON.stringify(tasks[0]));
-    /*
-    await fetch("/api/test", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(tasks[0])
-    })
-      .then(response => response.text())
-      .then(response => console.log(response));
-    
-    */
   };
 
   return (
@@ -119,7 +102,7 @@ const App: React.FC = () => {
       />
       <Sidebar
         handleExport={handleExport}
-        Tasks={tasks}
+        tasks={tasks}
         addTask={addTask}
         selectedTask={selectedTask}
         setSelectedTask={setSelectedTask}

@@ -14,11 +14,10 @@ import {
 
 import MailIcon from "@material-ui/icons/Mail";
 import { Task } from "../App";
+import AddTaskDialog from "./AddTaskDialog";
 
 interface SidebarProps {
-  Tasks: {
-    [key: number]: Task;
-  };
+  tasks: Task[];
   addTask: (newTask: Task) => void;
   selectedTask: number;
   setSelectedTask: (taskIndex: number) => void;
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: drawerWidth
     },
     toolbar: theme.mixins.toolbar,
-    taskButton: {
+    dialogContainer: {
       width: drawerWidth,
       marginTop: "auto"
     },
@@ -48,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
   const classes = useStyles();
-  const { Tasks, selectedTask, setSelectedTask, handleExport, addTask } = props;
+  const { tasks, selectedTask, setSelectedTask, handleExport, addTask } = props;
 
   return (
     <div>
@@ -69,7 +68,7 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
         </Button>
         <Divider />
         <List>
-          {Object.entries(Tasks).map((task, index) => (
+          {Object.entries(tasks).map((task, index) => (
             <MenuItem
               button
               key={index}
@@ -83,18 +82,9 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
             </MenuItem>
           ))}
         </List>
-        <Button
-          className={classes.taskButton}
-          onClick={(): void =>
-            addTask({
-              label: "Task " + (Object.keys(Tasks).length + 1),
-              code: "",
-              splitCode: []
-            })
-          }
-        >
-          Add task
-        </Button>
+        <div className={classes.dialogContainer}>
+          <AddTaskDialog addTask={addTask} tasks={tasks} />
+        </div>
       </Drawer>
     </div>
   );

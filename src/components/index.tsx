@@ -6,6 +6,7 @@ import Tabbar from "./Tabbar";
 import CodeOutputGaps from "./CodeOutputGaps";
 import CodeOutputView from "./CodeOutputView";
 import DirectionCard from "./DirectionCard";
+import AddTaskDialog from "./AddTaskDialog";
 
 export {
   CodeInput,
@@ -15,5 +16,6 @@ export {
   Tabbar,
   CodeOutputGaps,
   CodeOutputView,
-  DirectionCard
+  DirectionCard,
+  AddTaskDialog
 };
