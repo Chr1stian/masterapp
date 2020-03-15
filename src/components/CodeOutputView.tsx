@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import CropIcon from "@material-ui/icons/Crop";
 import reactStringReplace from "react-string-replace";
+import AlertDialog from "./AlertDialog";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -54,6 +55,7 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
   const [selectedText, setSelectedText] = React.useState<undefined | string>(
     ""
   );
+  const [alertOpen, setAlertOpen] = React.useState(false);
 
   const handleMouseUp = (): void => {
     const selection = window.getSelection()?.toString();
@@ -64,7 +66,7 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
 
   const handleOnClick = (index: number, value: string): void => {
     if (task.splitCode[index].length === 3) {
-      alert("Can only split once per line");
+      setAlertOpen(true);
     } else if (selectedText) {
       const replacedString = reactStringReplace(
         value,
@@ -105,6 +107,14 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
           })}
         </List>
       </div>
+      <AlertDialog
+        open={alertOpen}
+        setOpen={setAlertOpen}
+        title={"One split only"}
+        text={
+          "You can only split the text once per line. Contact the developer if this is something you think should be changed."
+        }
+      ></AlertDialog>
     </div>
   );
 };
