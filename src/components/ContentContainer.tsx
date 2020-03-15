@@ -19,7 +19,9 @@ const ContentContainer: React.FC<ContentContainerProps> = (
       {tabIndex === 0 && task && (
         <CodeInput code={task.code} changeTask={changeTask} task={task} />
       )}
-      {tabIndex === 1 && <CodeOutput task={task} changeTask={changeTask} />}
+      {tabIndex === 1 && task && (
+        <CodeOutput task={task} changeTask={changeTask} />
+      )}
     </div>
   );
 };
