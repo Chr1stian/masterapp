@@ -35,6 +35,7 @@ export interface Task {
   label: string;
   code: string;
   splitCode: ReactNodeArray[];
+  language: string;
 }
 
 const App: React.FC = () => {
@@ -47,17 +48,20 @@ const App: React.FC = () => {
     {
       label: "Task 1",
       code: "testcode1\nline 2",
-      splitCode: [["testcode1"], ["line 2"]]
+      splitCode: [["testcode1"], ["line 2"]],
+      language: "python"
     },
     {
       label: "Task 2",
       code: "testcode2\nline 2",
-      splitCode: [["testcode2"], ["line 2"]]
+      splitCode: [["testcode2"], ["line 2"]],
+      language: "text/x-java"
     },
     {
       label: "Task 3",
       code: "testcode3\nline 2",
-      splitCode: [["testcode3"], ["line 2"]]
+      splitCode: [["testcode3"], ["line 2"]],
+      language: "javascript"
     }
   ]);
 

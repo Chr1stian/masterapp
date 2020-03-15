@@ -50,7 +50,7 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = (
   };
 
   const handleCreate = (): void => {
-    addTask({ label: taskName, code: "", splitCode: [] });
+    addTask({ label: taskName, code: "", splitCode: [], language: "python" });
     handleClose();
   };
 

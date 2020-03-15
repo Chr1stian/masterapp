@@ -31,15 +31,15 @@ const CodeInput: React.FC<CodeInputProps> = (props: CodeInputProps) => {
     changeTask(selectedTask, task);
   };
 
-  const [language, setLanguage] = React.useState("javascript");
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    setLanguage(event.target.value as string);
+    task.language = event.target.value as string;
+    changeTask(selectedTask, task);
   };
 
   return (
     <div>
       <DirectionCard text={"Paste or write your code here"}></DirectionCard>
-      <Select value={language} onChange={handleChange}>
+      <Select value={task.language} onChange={handleChange}>
         <MenuItem value={"javascript"}>JavaScript</MenuItem>
         <MenuItem value={"python"}>Python</MenuItem>
         <MenuItem value={"text/x-java"}>Java</MenuItem>
@@ -49,7 +49,7 @@ const CodeInput: React.FC<CodeInputProps> = (props: CodeInputProps) => {
         className={className}
         value={task.code}
         options={{
-          mode: language,
+          mode: task.language,
           theme: "material",
           lineNumbers: true
         }}
