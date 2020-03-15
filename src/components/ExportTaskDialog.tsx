@@ -1,6 +1,8 @@
 import React from "react";
 import {
   Button,
+  Card,
+  CardMedia,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -25,7 +27,11 @@ const useStyles = makeStyles(() =>
       height: "100%"
     },
     div: { height: "100%" },
-    image: { width: "100%", margin: "10px" }
+    card: { margin: "5px" },
+    media: {
+      height: 0,
+      paddingTop: "18.25%" // 16:9
+    }
   })
 );
 
@@ -80,14 +86,19 @@ const ExportTaskDialog: React.FC<ExportTaskDialogProps> = (
             choosen name. Upload the file in the Inspera admin-interface by
             navigating as displayed in the images below.
           </DialogContentText>
-          <img
-            className={classes.image}
-            src={require("../images/author_questions.png")}
-          />
-          <img
-            className={classes.image}
-            src={require("../images/dropdown_importQTI.png")}
-          />
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              image={require("../images/author_questions.png")}
+            />
+          </Card>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              image={require("../images/dropdown_importQTI.png")}
+            />
+          </Card>
+
           <TextField
             autoFocus
             margin="dense"
