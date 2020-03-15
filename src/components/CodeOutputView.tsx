@@ -43,15 +43,14 @@ const useStyles = makeStyles(() =>
 
 interface CodeOutputViewProps {
   task: Task;
-  changeTask: (key: number, task: Task) => void;
-  selectedTask: number;
+  changeTask: (task: Task) => void;
 }
 
 const CodeOutputView: React.FC<CodeOutputViewProps> = (
   props: CodeOutputViewProps
 ) => {
   const classes = useStyles();
-  const { task, changeTask, selectedTask } = props;
+  const { task, changeTask } = props;
   const [selectedText, setSelectedText] = React.useState<undefined | string>(
     ""
   );
@@ -73,7 +72,7 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
         (match: string) => match
       );
       task.splitCode[index] = replacedString;
-      changeTask(selectedTask, task);
+      changeTask(task);
     }
   };
 

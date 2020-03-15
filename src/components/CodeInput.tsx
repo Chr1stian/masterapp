@@ -18,9 +18,8 @@ require("codemirror/mode/clike/clike");
 
 interface CodeInputProps {
   code: string;
-  changeTask: (key: number, task: Task) => void;
+  changeTask: (task: Task) => void;
   task: Task;
-  selectedTask: number;
 }
 
 const useStyles = makeStyles(() =>
@@ -37,7 +36,7 @@ const useStyles = makeStyles(() =>
 
 const CodeInput: React.FC<CodeInputProps> = (props: CodeInputProps) => {
   const classes = useStyles();
-  const { changeTask, task, selectedTask } = props;
+  const { changeTask, task } = props;
   const setCode = (code: string): void => {
     task.code = code;
     const newSplitCode: React.ReactNodeArray[] = [];
@@ -46,12 +45,12 @@ const CodeInput: React.FC<CodeInputProps> = (props: CodeInputProps) => {
       newSplitCode.push([element]);
     });
     task.splitCode = newSplitCode;
-    changeTask(selectedTask, task);
+    changeTask(task);
   };
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
     task.language = event.target.value as string;
-    changeTask(selectedTask, task);
+    changeTask(task);
   };
 
   return (

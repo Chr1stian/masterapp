@@ -44,30 +44,11 @@ const App: React.FC = () => {
   const [tabIndex, setTabIndex] = React.useState(0);
   const [selectedTask, setSelectedTask] = React.useState(0);
 
-  const [tasks, setTasks] = React.useState<Task[]>([
-    {
-      label: "Task 1",
-      code: "testcode1\nline 2",
-      splitCode: [["testcode1"], ["line 2"]],
-      language: "python"
-    },
-    {
-      label: "Task 2",
-      code: "testcode2\nline 2",
-      splitCode: [["testcode2"], ["line 2"]],
-      language: "text/x-java"
-    },
-    {
-      label: "Task 3",
-      code: "testcode3\nline 2",
-      splitCode: [["testcode3"], ["line 2"]],
-      language: "javascript"
-    }
-  ]);
+  const [tasks, setTasks] = React.useState<Task[]>([]);
 
-  const updateTask = (key: number, task: Task): void => {
+  const updateTask = (task: Task): void => {
     const newTasks = [...tasks];
-    newTasks[key] = task;
+    newTasks[selectedTask] = task;
     setTasks(newTasks);
   };
 
@@ -115,9 +96,8 @@ const App: React.FC = () => {
         <div className={classes.toolbar} />
         <ContentContainer
           tabIndex={tabIndex}
-          tasks={tasks}
+          task={tasks[selectedTask]}
           changeTask={updateTask}
-          selectedTask={selectedTask}
         />
       </main>
     </div>

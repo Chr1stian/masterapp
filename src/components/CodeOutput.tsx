@@ -21,13 +21,12 @@ const useStyles = makeStyles(() =>
 
 interface CodeOutputProps {
   task: Task;
-  changeTask: (key: number, task: Task) => void;
-  selectedTask: number;
+  changeTask: (task: Task) => void;
 }
 
 const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
   const classes = useStyles();
-  const { task, changeTask, selectedTask } = props;
+  const { task, changeTask } = props;
 
   return (
     <div className={classes.wrapper}>
@@ -36,11 +35,7 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
       ></DirectionCard>
       <Card className={classes.card}>
         <CodeOutputGaps task={task} />
-        <CodeOutputView
-          task={task}
-          changeTask={changeTask}
-          selectedTask={selectedTask}
-        />
+        <CodeOutputView task={task} changeTask={changeTask} />
       </Card>
     </div>
   );
