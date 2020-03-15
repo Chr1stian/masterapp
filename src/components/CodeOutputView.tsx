@@ -65,7 +65,7 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
   };
 
   const handleOnClick = (index: number, value: string): void => {
-    if (task.splitCode[index].length === 3) {
+    if (task.splitCode[index].length >= 3) {
       setAlertOpen(true);
     } else if (selectedText) {
       const replacedString = reactStringReplace(
