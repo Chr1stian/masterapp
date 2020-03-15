@@ -15,13 +15,14 @@ import {
 import FormatIndentIncreaseIcon from "@material-ui/icons/FormatIndentIncrease";
 import { Task } from "../App";
 import AddTaskDialog from "./AddTaskDialog";
+import ExportTaskDialog from "./ExportTaskDialog";
 
 interface SidebarProps {
   tasks: Task[];
   addTask: (newTask: Task) => void;
   selectedTask: number;
   setSelectedTask: (taskIndex: number) => void;
-  handleExport: () => void;
+  handleExport: (fileName: string) => void;
 }
 
 const drawerWidth = 200;
@@ -59,13 +60,9 @@ const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
         }}
         anchor="left"
       >
-        <Button
-          className={classes.toolbar}
-          variant="contained"
-          onClick={handleExport}
-        >
-          Export
-        </Button>
+        <div className={classes.toolbar}>
+          <ExportTaskDialog tasks={tasks} handleExport={handleExport} />
+        </div>
         <Divider />
         <List>
           {Object.entries(tasks).map((task, index) => (

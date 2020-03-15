@@ -83,7 +83,7 @@ const App: React.FC = () => {
     setTabIndex(selectedTab);
   };
 
-  const handleExport = async (): Promise<void> => {
+  const handleExport = async (fileName: string): Promise<void> => {
     fetch("/api/zip-download", {
       method: "POST",
       headers: {
@@ -92,7 +92,7 @@ const App: React.FC = () => {
       body: JSON.stringify(tasks[0])
     }).then(async response => {
       const blob = await response.blob();
-      saveAs(blob, "testfil.zip");
+      saveAs(blob, fileName + ".zip");
     });
     console.log(JSON.stringify(tasks[0]));
   };

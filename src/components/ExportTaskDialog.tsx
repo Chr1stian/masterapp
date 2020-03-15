@@ -12,27 +12,30 @@ import {
 } from "@material-ui/core";
 import { Task } from "../App";
 
-interface AddTaskDialogProps {
+interface ExportTaskDialogProps {
   tasks: Task[];
-  addTask: (newTask: Task) => void;
+  handleExport: (fileName: string) => void;
 }
 
 const drawerWidth = 200;
 const useStyles = makeStyles(() =>
   createStyles({
     taskButton: {
-      width: drawerWidth
-    }
+      width: drawerWidth,
+      height: "100%"
+    },
+    div: { height: "100%" },
+    image: { width: "100%", margin: "10px" }
   })
 );
 
-const AddTaskDialog: React.FC<AddTaskDialogProps> = (
-  props: AddTaskDialogProps
+const ExportTaskDialog: React.FC<ExportTaskDialogProps> = (
+  props: ExportTaskDialogProps
 ) => {
   const classes = useStyles();
-  const { tasks, addTask } = props;
+  const { handleExport } = props;
   const [open, setOpen] = React.useState(false);
-  const [taskName, setTaskName] = React.useState("Task " + (tasks.length + 1));
+  const [fileName, setfileName] = React.useState("Inspera_tasks");
 
   const handleClickOpen = (): void => {
     setOpen(true);
@@ -45,51 +48,60 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = (
   const handleChange = () => (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    setTaskName(event.target.value);
+    setfileName(event.target.value);
   };
 
   const handleCreate = (): void => {
-    addTask({ label: taskName, code: "", splitCode: [], language: "python" });
+    handleExport(fileName);
     handleClose();
   };
 
   return (
-    <div>
+    <div className={classes.div}>
       <Button
         className={classes.taskButton}
-        variant="contained"
+        variant="outlined"
         color="primary"
         onClick={handleClickOpen}
       >
-        Add task
+        Export task
       </Button>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
         fullWidth={false}
-        maxWidth={"xs"}
+        maxWidth={"md"}
       >
-        <DialogTitle id="form-dialog-title">Create new task</DialogTitle>
+        <DialogTitle id="form-dialog-title">Export task(s)</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Enter the name of your task here. It will be displayed above the
-            created task description.
+            Exporting of tasks will create and download a ZIP-file with your
+            choosen name. Upload the file in the Inspera admin-interface by
+            navigating as displayed in the images below.
           </DialogContentText>
+          <img
+            className={classes.image}
+            src={require("../images/author_questions.png")}
+          />
+          <img
+            className={classes.image}
+            src={require("../images/dropdown_importQTI.png")}
+          />
           <TextField
             autoFocus
             margin="dense"
             id="name"
-            label="Task name"
+            label="Filename"
             type="text"
             fullWidth
-            value={taskName}
+            value={fileName}
             onChange={handleChange()}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCreate} color="primary">
-            Create
+            Download ZIP
           </Button>
         </DialogActions>
       </Dialog>
@@ -97,4 +109,4 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = (
   );
 };
 
-export default AddTaskDialog;
+export default ExportTaskDialog;
