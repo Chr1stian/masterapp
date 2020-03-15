@@ -18,7 +18,12 @@ const useStyles = makeStyles(() =>
     wrapper: {},
     container: {},
     list: { width: "100%" },
-    listItem: { whiteSpace: "pre-wrap" },
+    listItem: {
+      whiteSpace: "pre-wrap",
+      minHeight: "32px",
+      borderBottom: "2px dotted grey",
+      margin: "2px"
+    },
     card: {
       width: "25%",
       alignSelf: "auto"

@@ -11,7 +11,7 @@ const useStyles = makeStyles(() =>
       flexDirection: "row",
       flexWrap: "wrap",
       minHeight: "26px",
-      margin: "5px",
+      marginTop: "5px",
       padding: "5px"
     },
     cardContent: {},
