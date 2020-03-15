@@ -11,6 +11,7 @@ import {
   makeStyles
 } from "@material-ui/core";
 import { Task } from "../App";
+import AlertDialog from "./AlertDialog";
 
 interface AddTaskDialogProps {
   tasks: Task[];
@@ -32,10 +33,15 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = (
   const classes = useStyles();
   const { tasks, addTask } = props;
   const [open, setOpen] = React.useState(false);
+  const [alertOpen, setAlertOpen] = React.useState(false);
   const [taskName, setTaskName] = React.useState("Task " + (tasks.length + 1));
 
   const handleClickOpen = (): void => {
-    setOpen(true);
+    if (tasks.length >= 1) {
+      setAlertOpen(true);
+    } else {
+      setOpen(true);
+    }
   };
 
   const handleClose = (): void => {
@@ -63,6 +69,14 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = (
       >
         Add task
       </Button>
+      <AlertDialog
+        title={"Only one task"}
+        text={
+          "In this version it is only possible to create and export a single task"
+        }
+        open={alertOpen}
+        setOpen={setAlertOpen}
+      ></AlertDialog>
       <Dialog
         open={open}
         onClose={handleClose}

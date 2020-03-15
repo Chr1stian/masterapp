@@ -8,6 +8,7 @@ import CodeOutputView from "./CodeOutputView";
 import DirectionCard from "./DirectionCard";
 import AddTaskDialog from "./AddTaskDialog";
 import ExportTaskDialog from "./ExportTaskDialog";
+import AlertDialog from "./AlertDialog";
 
 export {
   CodeInput,
@@ -19,5 +20,6 @@ export {
   CodeOutputView,
   DirectionCard,
   ExportTaskDialog,
-  AddTaskDialog
+  AddTaskDialog,
+  AlertDialog
 };
