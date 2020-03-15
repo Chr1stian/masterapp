@@ -18,6 +18,7 @@ const useStyles = makeStyles(() =>
     wrapper: {},
     container: {},
     list: { width: "100%" },
+    listItem: { whiteSpace: "pre-wrap" },
     card: {
       width: "25%",
       alignSelf: "auto"
@@ -77,7 +78,7 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
         <List className={classes.list}>
           {task.splitCode.map((value: any, index: number) => {
             return (
-              <ListItem key={index} dense>
+              <ListItem key={index} dense className={classes.listItem}>
                 {value.length === 1 && <Typography>{value}</Typography>}
                 {value.length !== 1 && (
                   <div className={classes.cardContent}>
