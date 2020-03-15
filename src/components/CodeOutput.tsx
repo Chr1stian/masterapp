@@ -1,6 +1,6 @@
 import React from "react";
 import { Task } from "../App";
-import { makeStyles, createStyles } from "@material-ui/core";
+import { makeStyles, createStyles, Card } from "@material-ui/core";
 import CodeOutputGaps from "./CodeOutputGaps";
 import CodeOutputView from "./CodeOutputView";
 import DirectionCard from "./DirectionCard";
@@ -11,6 +11,10 @@ const useStyles = makeStyles(() =>
       display: "flex",
       flexWrap: "nowrap",
       flexDirection: "column"
+    },
+    card: {
+      marginTop: "5px",
+      padding: "5px"
     }
   })
 );
@@ -30,12 +34,14 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
       <DirectionCard
         text={"Highlight text/code to be cut and press the crop icon"}
       ></DirectionCard>
-      <CodeOutputGaps task={task} />
-      <CodeOutputView
-        task={task}
-        changeTask={changeTask}
-        selectedTask={selectedTask}
-      />
+      <Card className={classes.card}>
+        <CodeOutputGaps task={task} />
+        <CodeOutputView
+          task={task}
+          changeTask={changeTask}
+          selectedTask={selectedTask}
+        />
+      </Card>
     </div>
   );
 };

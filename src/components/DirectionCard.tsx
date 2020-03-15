@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Card,
-  Typography,
-  CardContent,
-  createStyles,
-  makeStyles
-} from "@material-ui/core";
+import { Card, Typography, createStyles, makeStyles } from "@material-ui/core";
 import InfoIcon from "@material-ui/icons/Info";
 
 interface DirectionCardProps {
