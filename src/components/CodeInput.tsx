@@ -11,7 +11,6 @@ require("codemirror/mode/python/python");
 require("codemirror/mode/clike/clike");
 
 interface CodeInputProps {
-  className?: string;
   code: string;
   changeTask: (key: number, task: Task) => void;
   task: Task;
@@ -19,7 +18,7 @@ interface CodeInputProps {
 }
 
 const CodeInput: React.FC<CodeInputProps> = (props: CodeInputProps) => {
-  const { changeTask, task, selectedTask, className } = props;
+  const { changeTask, task, selectedTask } = props;
   const setCode = (code: string): void => {
     task.code = code;
     const newSplitCode: React.ReactNodeArray[] = [];
@@ -46,7 +45,6 @@ const CodeInput: React.FC<CodeInputProps> = (props: CodeInputProps) => {
         <MenuItem value={"Other"}>Other</MenuItem>
       </Select>
       <CodeMirror
-        className={className}
         value={task.code}
         options={{
           mode: task.language,
