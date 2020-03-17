@@ -52,27 +52,29 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
 ) => {
   const classes = useStyles();
   const { task, changeTask } = props;
-  const [selectedText, setSelectedText] = React.useState<undefined | string>(
-    ""
-  );
+  const [anchorOffset, setAnchorOffset] = React.useState<undefined | number>(0);
+  const [focusOffset, setFocusOffset] = React.useState<undefined | number>(0);
+
   const [alertOpen, setAlertOpen] = React.useState(false);
 
   const handleMouseUp = (): void => {
-    const selection = window.getSelection()?.toString();
+    const selection = window.getSelection();
     if (window.getSelection()) {
-      setSelectedText(selection);
+      setAnchorOffset(selection?.anchorOffset);
+      setFocusOffset(selection?.focusOffset);
     }
   };
 
   const handleOnClick = (index: number, value: string): void => {
-    if (task.splitCode[index].length >= 3) {
+    if (value.length >= 3) {
       setAlertOpen(true);
-    } else if (selectedText) {
-      const replacedString = reactStringReplace(
-        value,
-        selectedText,
-        (match: string) => match
-      );
+    } else if (anchorOffset && focusOffset) {
+      value = value[0];
+      const replacedString = [
+        value.substring(0, anchorOffset),
+        value.substring(anchorOffset, focusOffset),
+        value.substring(focusOffset, value.length)
+      ];
       task.splitCode[index] = replacedString;
       changeTask(task);
     }
