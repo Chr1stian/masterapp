@@ -55,7 +55,13 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = (
   };
 
   const handleCreate = (): void => {
-    addTask({ label: taskName, code: "", splitCode: [], language: "python" });
+    addTask({
+      label: taskName,
+      code: "",
+      splitCode: [],
+      distractors: [],
+      language: "python"
+    });
     handleClose();
   };
 

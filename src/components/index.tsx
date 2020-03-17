@@ -9,6 +9,7 @@ import DirectionCard from "./DirectionCard";
 import AddTaskDialog from "./AddTaskDialog";
 import ExportTaskDialog from "./ExportTaskDialog";
 import AlertDialog from "./AlertDialog";
+import AddDistractors from "./AddDistractors";
 
 export {
   CodeInput,
@@ -21,5 +22,6 @@ export {
   DirectionCard,
   ExportTaskDialog,
   AddTaskDialog,
-  AlertDialog
+  AlertDialog,
+  AddDistractors
 };

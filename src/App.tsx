@@ -35,6 +35,7 @@ export interface Task {
   label: string;
   code: string;
   splitCode: ReactNodeArray[];
+  distractors: string[];
   language: string;
 }
 

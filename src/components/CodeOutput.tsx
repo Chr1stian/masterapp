@@ -34,7 +34,7 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
         text={"Highlight text/code to be cut and press the crop icon"}
       ></DirectionCard>
       <Card className={classes.card}>
-        <CodeOutputGaps task={task} />
+        <CodeOutputGaps task={task} changeTask={changeTask} />
         <CodeOutputView task={task} changeTask={changeTask} />
       </Card>
     </div>
