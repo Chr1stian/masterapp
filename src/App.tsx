@@ -45,6 +45,15 @@ const App: React.FC = () => {
   const [tabIndex, setTabIndex] = React.useState(0);
   const [selectedTask, setSelectedTask] = React.useState(0);
 
+  /*
+    {
+      label: "test1",
+      code: "line1",
+      splitCode: [],
+      distractors: [],
+      language: "python"
+    }
+  */
   const [tasks, setTasks] = React.useState<Task[]>([]);
 
   const updateTask = (task: Task): void => {

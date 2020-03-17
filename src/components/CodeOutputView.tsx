@@ -11,7 +11,6 @@ import {
   Typography
 } from "@material-ui/core";
 import CropIcon from "@material-ui/icons/Crop";
-import reactStringReplace from "react-string-replace";
 import AlertDialog from "./AlertDialog";
 
 const useStyles = makeStyles(() =>

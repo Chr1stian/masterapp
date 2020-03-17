@@ -19,10 +19,9 @@
     "file-saver": "^2.0.2",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
-    "react-codemirror2": "^6.0.0",
+    "react-codemirror2": "^6.0.1",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0",
-    "react-string-replace": "^0.4.4",
     "typescript": "^3.7.5"
   },
   "scripts": {
