@@ -13,7 +13,8 @@ const useStyles = makeStyles(() =>
       flexWrap: "wrap",
       minHeight: "26px",
       marginTop: "5px",
-      padding: "5px"
+      padding: "5px",
+      backgroundColor: "#e6ebf2"
     },
     cardContent: {},
     gap: {

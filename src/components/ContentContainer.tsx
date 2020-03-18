@@ -1,26 +1,36 @@
 import React from "react";
 import { Task } from "../App";
-import { CodeInput, CodeOutput } from ".";
+import ContentView from "./ContentView";
+import NavigationButtons from "./NavigationButtons";
 
 interface ContentContainerProps {
-  className?: string;
   task: Task;
   changeTask: (task: Task) => void;
+  changeTab: (selectedTab: number) => void;
+
   tabIndex: number;
 }
 
 const ContentContainer: React.FC<ContentContainerProps> = (
   props: ContentContainerProps
 ) => {
-  const { task, className, changeTask, tabIndex } = props;
+  const { task, changeTask, tabIndex, changeTab } = props;
 
   return (
-    <div className={className}>
-      {tabIndex === 0 && task && (
-        <CodeInput code={task.code} changeTask={changeTask} task={task} />
-      )}
-      {tabIndex === 1 && task && (
-        <CodeOutput task={task} changeTask={changeTask} />
+    <div>
+      {task && (
+        <div>
+          <ContentView
+            tabIndex={tabIndex}
+            task={task}
+            changeTask={changeTask}
+          />
+          <NavigationButtons
+            task={task}
+            tabIndex={tabIndex}
+            changeTab={changeTab}
+          />
+        </div>
       )}
     </div>
   );

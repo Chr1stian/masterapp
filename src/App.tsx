@@ -67,10 +67,7 @@ const App: React.FC = () => {
     setTasks(newTasks);
   };
 
-  const changeTab = (
-    event: React.ChangeEvent<{}>,
-    selectedTab: number
-  ): void => {
+  const changeTab = (selectedTab: number): void => {
     setTabIndex(selectedTab);
   };
 
@@ -94,6 +91,7 @@ const App: React.FC = () => {
         tabIndex={tabIndex}
         changeTab={changeTab}
         className={classes.appBar}
+        task={tasks[selectedTask]}
       />
       <Sidebar
         handleExport={handleExport}
@@ -108,6 +106,7 @@ const App: React.FC = () => {
           tabIndex={tabIndex}
           task={tasks[selectedTask]}
           changeTask={updateTask}
+          changeTab={changeTab}
         />
       </main>
     </div>

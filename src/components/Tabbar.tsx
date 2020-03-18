@@ -1,14 +1,20 @@
 import React from "react";
 import { AppBar, Toolbar, Tabs, Tab } from "@material-ui/core";
+import { Task } from "../App";
 
 interface TabbarProps {
   tabIndex: number;
-  changeTab: (event: React.ChangeEvent<{}>, selectedTab: number) => void;
+  changeTab: (selectedTab: number) => void;
   className: string;
+  task: Task;
 }
 
 const Tabbar: React.FC<TabbarProps> = (props: TabbarProps) => {
-  const { tabIndex, changeTab, className } = props;
+  const { tabIndex, changeTab, className, task } = props;
+
+  const handleChange = (event: React.ChangeEvent<{}>, value: number): void => {
+    changeTab(value);
+  };
 
   return (
     <div>
@@ -17,10 +23,10 @@ const Tabbar: React.FC<TabbarProps> = (props: TabbarProps) => {
           <Tabs
             value={tabIndex}
             aria-label="task_steps_bar"
-            onChange={changeTab}
+            onChange={handleChange}
           >
             <Tab label="Step One" />
-            <Tab label="Step Two" />
+            {task && task.code && <Tab label="Step Two" />}
           </Tabs>
         </Toolbar>
       </AppBar>

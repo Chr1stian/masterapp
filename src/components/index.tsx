@@ -10,6 +10,8 @@ import AddTaskDialog from "./AddTaskDialog";
 import ExportTaskDialog from "./ExportTaskDialog";
 import AlertDialog from "./AlertDialog";
 import AddDistractors from "./AddDistractors";
+import ContentView from "./ContentView";
+import NavigationButtons from "./NavigationButtons";
 
 export {
   CodeInput,
@@ -23,5 +25,7 @@ export {
   ExportTaskDialog,
   AddTaskDialog,
   AlertDialog,
-  AddDistractors
+  AddDistractors,
+  NavigationButtons,
+  ContentView
 };

@@ -14,7 +14,8 @@ const useStyles = makeStyles(() =>
     },
     card: {
       marginTop: "5px",
-      padding: "5px"
+      padding: "5px",
+      minHeight: "68vh"
     }
   })
 );
