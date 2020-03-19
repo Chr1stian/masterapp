@@ -42,11 +42,11 @@ const CodeOutputGaps: React.FC<CodeOutputGapsProps> = (
   return (
     <div className={classes.wrapper}>
       <Card className={classes.card}>
-        {task.splitCode.map((value: ReactNodeArray) => {
+        {task.splitCode.map((value: ReactNodeArray, index) => {
           return (
             typeof value !== "string" &&
             value[1] && (
-              <div className={classes.cardContent}>
+              <div className={classes.cardContent} key={index}>
                 <Card className={classes.gap} variant="outlined">
                   <Typography className={classes.typography}>
                     {value[1]}
