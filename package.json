@@ -1,5 +1,5 @@
 {
-  "name": "master-app",
+  "name": "masterapp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -31,7 +31,7 @@
     "eject": "react-scripts eject",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "build:gradle": "cross-env CI=true npm run test && npm run build",
-    "postbuild": "shx rm -rf ../master-backend/src/main/resources/static && shx cp -r build ../master-backend/src/main/resources/static"
+    "postbuild": "shx rm -rf ../masterbackend/src/main/resources/static && shx cp -r build ../masterbackend/src/main/resources/static"
   },
   "eslintConfig": {
     "extends": "react-app"
