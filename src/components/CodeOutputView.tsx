@@ -8,7 +8,7 @@ import {
   ListItemSecondaryAction,
   IconButton,
   Card,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import CropIcon from "@material-ui/icons/Crop";
 import AlertDialog from "./AlertDialog";
@@ -22,22 +22,22 @@ const useStyles = makeStyles(() =>
       whiteSpace: "pre-wrap",
       minHeight: "32px",
       borderBottom: "2px dotted grey",
-      margin: "2px"
+      margin: "2px",
     },
     card: {
       width: "25%",
-      alignSelf: "auto"
+      alignSelf: "auto",
     },
     cardContent: {
       display: "flex",
-      flexDirection: "row"
+      flexDirection: "row",
     },
     gap: {
       width: "100px",
       borderStyle: "dashed",
       marginLeft: "5px",
-      marginRight: "5px"
-    }
+      marginRight: "5px",
+    },
   })
 );
 
@@ -68,11 +68,13 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
     if (value.length >= 3) {
       setAlertOpen(true);
     } else if (anchorOffset && focusOffset) {
+      const startpoint = Math.min(anchorOffset, focusOffset);
+      const endpoint = Math.max(anchorOffset, focusOffset);
       value = value[0];
       const replacedString = [
-        value.substring(0, anchorOffset),
-        value.substring(anchorOffset, focusOffset),
-        value.substring(focusOffset, value.length)
+        value.substring(0, startpoint),
+        value.substring(startpoint, endpoint),
+        value.substring(endpoint, value.length),
       ];
       task.splitCode[index] = replacedString;
       changeTask(task);
