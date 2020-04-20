@@ -17,7 +17,11 @@ const useStyles = makeStyles(() =>
   createStyles({
     wrapper: {},
     container: {},
-    list: { width: "100%" },
+    list: {
+      width: "max-content",
+      display: "inline-flex",
+      flexDirection: "column",
+    },
     listItem: {
       whiteSpace: "pre-wrap",
       minHeight: "32px",
@@ -37,6 +41,9 @@ const useStyles = makeStyles(() =>
       borderStyle: "dashed",
       marginLeft: "5px",
       marginRight: "5px",
+    },
+    content: {
+      marginRight: "35px",
     },
   })
 );
@@ -121,10 +128,11 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
                     <Typography>{value[2]}</Typography>
                   </div>
                 )}
+
                 <ListItemSecondaryAction>
                   <IconButton
                     edge="end"
-                    aria-label="comments"
+                    aria-label="crop"
                     onClick={(): void => handleOnClick(index, value)}
                   >
                     <CropIcon />
