@@ -53,6 +53,10 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
   const { task, changeTask } = props;
   const [anchorOffset, setAnchorOffset] = React.useState<undefined | number>(0);
   const [focusOffset, setFocusOffset] = React.useState<undefined | number>(0);
+  const [alertTitle, setAlertTitle] = React.useState("Error");
+  const [alertText, setAlertText] = React.useState(
+    "Something went wrong. Contact the developer with information on how you produced this error."
+  );
 
   const [alertOpen, setAlertOpen] = React.useState(false);
 
@@ -66,28 +70,49 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
 
   const handleOnClick = (index: number, value: string): void => {
     if (value.length >= 3) {
+      setAlertTitle("One split only");
+      setAlertText(
+        "You can only split the text once per line. Contact the developer if this is something you think should be changed"
+      );
       setAlertOpen(true);
-    } else if (anchorOffset && focusOffset) {
-      const startpoint = Math.min(anchorOffset, focusOffset);
-      const endpoint = Math.max(anchorOffset, focusOffset);
-      value = value[0];
-      const replacedString = [
-        value.substring(0, startpoint),
-        value.substring(startpoint, endpoint),
-        value.substring(endpoint, value.length),
-      ];
-      task.splitCode[index] = replacedString;
-      changeTask(task);
+    } else {
+      if (
+        value[0] === window.getSelection()?.anchorNode?.nodeValue?.toString()
+      ) {
+        if (anchorOffset !== undefined && focusOffset !== undefined) {
+          const startpoint = Math.min(anchorOffset, focusOffset);
+          const endpoint = Math.max(anchorOffset, focusOffset);
+          value = value[0];
+          const replacedString = [
+            value.substring(0, startpoint),
+            value.substring(startpoint, endpoint),
+            value.substring(endpoint, value.length),
+          ];
+          task.splitCode[index] = replacedString;
+          changeTask(task);
+        }
+      } else {
+        setAlertTitle("Wrong selection");
+        setAlertText(
+          "You need to select text and press the button that belongs to the same line"
+        );
+        setAlertOpen(true);
+      }
     }
   };
 
   return (
     <div className={classes.wrapper}>
-      <div className={classes.container} onMouseUp={handleMouseUp}>
+      <div className={classes.container}>
         <List className={classes.list}>
           {task.splitCode.map((value: any, index: number) => {
             return (
-              <ListItem key={index} dense className={classes.listItem}>
+              <ListItem
+                key={index}
+                dense
+                className={classes.listItem}
+                onMouseUp={handleMouseUp}
+              >
                 {value.length === 1 && <Typography>{value}</Typography>}
                 {value.length !== 1 && (
                   <div className={classes.cardContent}>
@@ -113,10 +138,8 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
       <AlertDialog
         open={alertOpen}
         setOpen={setAlertOpen}
-        title={"One split only"}
-        text={
-          "You can only split the text once per line. Contact the developer if this is something you think should be changed."
-        }
+        title={alertTitle}
+        text={alertText}
       ></AlertDialog>
     </div>
   );
