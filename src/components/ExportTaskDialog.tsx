@@ -75,7 +75,7 @@ const ExportTaskDialog: React.FC<ExportTaskDialogProps> = (
         variant="outlined"
         color="primary"
         onClick={handleClickOpen}
-        // disabled={tasks[0]?.splitCode[0]?.length !== 3}
+        disabled={tasks[0]?.splitCode[0]?.length !== 3}
       >
         Export tasks
       </Button>
