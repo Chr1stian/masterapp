@@ -32,6 +32,12 @@ const useStyles = makeStyles(() =>
       height: 0,
       paddingTop: "18.25%", // 16:9
     },
+    doubleCard: { margin: "5px", display: "flex", flexDirection: "row" },
+    doubleMedia: {
+      height: 350,
+      width: "50%",
+      marginLeft: "2%",
+    },
   })
 );
 
@@ -69,7 +75,7 @@ const ExportTaskDialog: React.FC<ExportTaskDialogProps> = (
         variant="outlined"
         color="primary"
         onClick={handleClickOpen}
-        disabled={tasks[0]?.splitCode[0]?.length !== 3}
+        // disabled={tasks[0]?.splitCode[0]?.length !== 3}
       >
         Export tasks
       </Button>
@@ -99,7 +105,18 @@ const ExportTaskDialog: React.FC<ExportTaskDialogProps> = (
               image={require("../images/dropdown_importQTI.png")}
             />
           </Card>
-
+          <Card className={classes.doubleCard}>
+            <CardMedia
+              className={classes.doubleMedia}
+              image={require("../images/handle_duplicates.png")}
+            />
+            <CardMedia
+              className={classes.doubleMedia}
+              image={require("../images/preview_task.png")}
+            />
+          </Card>
+        </DialogContent>
+        <DialogActions style={{ backgroundColor: "#f0f2f0" }}>
           <TextField
             autoFocus
             margin="dense"
@@ -110,9 +127,7 @@ const ExportTaskDialog: React.FC<ExportTaskDialogProps> = (
             value={fileName}
             onChange={handleChange()}
           />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCreate} color="primary">
+          <Button onClick={handleCreate} color="primary" variant="outlined">
             Download ZIP
           </Button>
         </DialogActions>
