@@ -10,7 +10,7 @@ import {
   TextField,
   DialogActions,
   createStyles,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 import { Task } from "../App";
 
@@ -24,14 +24,14 @@ const useStyles = makeStyles(() =>
   createStyles({
     taskButton: {
       width: drawerWidth,
-      height: "100%"
+      height: "100%",
     },
     div: { height: "100%" },
     card: { margin: "5px" },
     media: {
       height: 0,
-      paddingTop: "18.25%" // 16:9
-    }
+      paddingTop: "18.25%", // 16:9
+    },
   })
 );
 
@@ -39,7 +39,7 @@ const ExportTaskDialog: React.FC<ExportTaskDialogProps> = (
   props: ExportTaskDialogProps
 ) => {
   const classes = useStyles();
-  const { handleExport } = props;
+  const { handleExport, tasks } = props;
   const [open, setOpen] = React.useState(false);
   const [fileName, setfileName] = React.useState("Inspera_tasks");
 
@@ -69,8 +69,9 @@ const ExportTaskDialog: React.FC<ExportTaskDialogProps> = (
         variant="outlined"
         color="primary"
         onClick={handleClickOpen}
+        disabled={tasks[0]?.splitCode[0]?.length !== 3}
       >
-        Export task
+        Export tasks
       </Button>
       <Dialog
         open={open}
