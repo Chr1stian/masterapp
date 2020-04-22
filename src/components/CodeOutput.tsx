@@ -42,7 +42,7 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
       return code.length;
     });
     lineLengths = lineLengths.concat(distractorLengths);
-    return Math.max(...lineLengths) * 10;
+    return Math.max(...lineLengths) * 9;
   };
 
   return (

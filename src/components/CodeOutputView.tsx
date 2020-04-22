@@ -120,19 +120,20 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
                 className={classes.listItem}
                 onMouseUp={handleMouseUp}
               >
-                {value.length === 1 && <Typography>{value}</Typography>}
-                {value.length !== 1 && (
-                  <div className={classes.cardContent}>
-                    <Typography>{value[0]}</Typography>
-                    <Card
-                      className={classes.gap}
-                      variant="outlined"
-                      style={{ width: gapWidth }}
-                    ></Card>
-                    <Typography>{value[2]}</Typography>
-                  </div>
-                )}
-
+                <div className={classes.content}>
+                  {value.length === 1 && <Typography>{value}</Typography>}
+                  {value.length !== 1 && (
+                    <div className={classes.cardContent}>
+                      <Typography>{value[0]}</Typography>
+                      <Card
+                        className={classes.gap}
+                        variant="outlined"
+                        style={{ width: gapWidth }}
+                      ></Card>
+                      <Typography>{value[2]}</Typography>
+                    </div>
+                  )}
+                </div>
                 <ListItemSecondaryAction>
                   <IconButton
                     edge="end"
