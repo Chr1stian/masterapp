@@ -14,17 +14,16 @@ const useStyles = makeStyles(() =>
       minHeight: "26px",
       marginTop: "5px",
       padding: "5px",
-      backgroundColor: "#e6ebf2"
+      backgroundColor: "#e6ebf2",
     },
     cardContent: {},
     gap: {
-      width: "100px",
-      margin: "2px"
+      margin: "5px",
     },
     typography: {
-      textAlign: "center"
+      textAlign: "center",
     },
-    distractors: { marginLeft: "auto" }
+    distractors: { marginLeft: "auto" },
   })
 );
 
@@ -39,6 +38,22 @@ const CodeOutputGaps: React.FC<CodeOutputGapsProps> = (
   const classes = useStyles();
   const { task, changeTask } = props;
 
+  const computeGapWidth = (): number => {
+    let lineLengths = task.splitCode.map((code) => {
+      if (code.length === 3) {
+        if (code[1] !== undefined && code[1]) {
+          return code[1].toString().length;
+        }
+      }
+      return 0;
+    });
+    const distractorLengths = task.distractors.map((code) => {
+      return code.length;
+    });
+    lineLengths = lineLengths.concat(distractorLengths);
+    return Math.max(...lineLengths) * 10;
+  };
+
   return (
     <div className={classes.wrapper}>
       <Card className={classes.card}>
@@ -47,7 +62,11 @@ const CodeOutputGaps: React.FC<CodeOutputGapsProps> = (
             typeof value !== "string" &&
             value[1] && (
               <div className={classes.cardContent} key={index}>
-                <Card className={classes.gap} variant="outlined">
+                <Card
+                  className={classes.gap}
+                  variant="outlined"
+                  style={{ width: computeGapWidth() }}
+                >
                   <Typography className={classes.typography}>
                     {value[1]}
                   </Typography>
@@ -59,7 +78,11 @@ const CodeOutputGaps: React.FC<CodeOutputGapsProps> = (
         {task.distractors.map((value: string) => {
           return (
             <div className={classes.cardContent} key={value}>
-              <Card className={classes.gap} variant="outlined">
+              <Card
+                className={classes.gap}
+                variant="outlined"
+                style={{ width: computeGapWidth() }}
+              >
                 <Typography className={classes.typography}>{value}</Typography>
               </Card>
             </div>
