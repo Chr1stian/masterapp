@@ -10,13 +10,13 @@ const useStyles = makeStyles(() =>
     wrapper: {
       display: "flex",
       flexWrap: "nowrap",
-      flexDirection: "column"
+      flexDirection: "column",
     },
     card: {
       marginTop: "5px",
       padding: "5px",
-      minHeight: "68vh"
-    }
+      minHeight: "68vh",
+    },
   })
 );
 
@@ -29,14 +29,38 @@ const CodeOutput: React.FC<CodeOutputProps> = (props: CodeOutputProps) => {
   const classes = useStyles();
   const { task, changeTask } = props;
 
+  const computeGapWidth = (): number => {
+    let lineLengths = task.splitCode.map((code) => {
+      if (code.length === 3) {
+        if (code[1] !== undefined && code[1]) {
+          return code[1].toString().length;
+        }
+      }
+      return 0;
+    });
+    const distractorLengths = task.distractors.map((code) => {
+      return code.length;
+    });
+    lineLengths = lineLengths.concat(distractorLengths);
+    return Math.max(...lineLengths) * 10;
+  };
+
   return (
     <div className={classes.wrapper}>
       <DirectionCard
         text={"Highlight text/code to be cut and press the crop icon"}
       ></DirectionCard>
       <Card className={classes.card}>
-        <CodeOutputGaps task={task} changeTask={changeTask} />
-        <CodeOutputView task={task} changeTask={changeTask} />
+        <CodeOutputGaps
+          task={task}
+          changeTask={changeTask}
+          gapWidth={computeGapWidth()}
+        />
+        <CodeOutputView
+          task={task}
+          changeTask={changeTask}
+          gapWidth={computeGapWidth()}
+        />
       </Card>
     </div>
   );

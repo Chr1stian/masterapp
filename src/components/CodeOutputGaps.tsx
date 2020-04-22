@@ -30,29 +30,14 @@ const useStyles = makeStyles(() =>
 interface CodeOutputGapsProps {
   task: Task;
   changeTask: (task: Task) => void;
+  gapWidth: number;
 }
 
 const CodeOutputGaps: React.FC<CodeOutputGapsProps> = (
   props: CodeOutputGapsProps
 ) => {
   const classes = useStyles();
-  const { task, changeTask } = props;
-
-  const computeGapWidth = (): number => {
-    let lineLengths = task.splitCode.map((code) => {
-      if (code.length === 3) {
-        if (code[1] !== undefined && code[1]) {
-          return code[1].toString().length;
-        }
-      }
-      return 0;
-    });
-    const distractorLengths = task.distractors.map((code) => {
-      return code.length;
-    });
-    lineLengths = lineLengths.concat(distractorLengths);
-    return Math.max(...lineLengths) * 10;
-  };
+  const { task, changeTask, gapWidth } = props;
 
   return (
     <div className={classes.wrapper}>
@@ -65,7 +50,7 @@ const CodeOutputGaps: React.FC<CodeOutputGapsProps> = (
                 <Card
                   className={classes.gap}
                   variant="outlined"
-                  style={{ width: computeGapWidth() }}
+                  style={{ width: gapWidth }}
                 >
                   <Typography className={classes.typography}>
                     {value[1]}
@@ -81,7 +66,7 @@ const CodeOutputGaps: React.FC<CodeOutputGapsProps> = (
               <Card
                 className={classes.gap}
                 variant="outlined"
-                style={{ width: computeGapWidth() }}
+                style={{ width: gapWidth }}
               >
                 <Typography className={classes.typography}>{value}</Typography>
               </Card>

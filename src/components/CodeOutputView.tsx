@@ -37,7 +37,6 @@ const useStyles = makeStyles(() =>
       flexDirection: "row",
     },
     gap: {
-      width: "100px",
       borderStyle: "dashed",
       marginLeft: "5px",
       marginRight: "5px",
@@ -51,13 +50,14 @@ const useStyles = makeStyles(() =>
 interface CodeOutputViewProps {
   task: Task;
   changeTask: (task: Task) => void;
+  gapWidth: number;
 }
 
 const CodeOutputView: React.FC<CodeOutputViewProps> = (
   props: CodeOutputViewProps
 ) => {
   const classes = useStyles();
-  const { task, changeTask } = props;
+  const { task, changeTask, gapWidth } = props;
   const [anchorOffset, setAnchorOffset] = React.useState<undefined | number>(0);
   const [focusOffset, setFocusOffset] = React.useState<undefined | number>(0);
   const [alertTitle, setAlertTitle] = React.useState("Error");
@@ -124,7 +124,11 @@ const CodeOutputView: React.FC<CodeOutputViewProps> = (
                 {value.length !== 1 && (
                   <div className={classes.cardContent}>
                     <Typography>{value[0]}</Typography>
-                    <Card className={classes.gap} variant="outlined"></Card>
+                    <Card
+                      className={classes.gap}
+                      variant="outlined"
+                      style={{ width: gapWidth }}
+                    ></Card>
                     <Typography>{value[2]}</Typography>
                   </div>
                 )}
