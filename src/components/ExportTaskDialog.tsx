@@ -68,6 +68,13 @@ const ExportTaskDialog: React.FC<ExportTaskDialogProps> = (
     handleClose();
   };
 
+  const checkIfSplit = (): boolean => {
+    const isSplit = tasks[0]?.splitCode?.map((code) => {
+      return code.length !== 3;
+    });
+    return !isSplit?.includes(false);
+  };
+
   return (
     <div className={classes.div}>
       <Button
@@ -75,7 +82,7 @@ const ExportTaskDialog: React.FC<ExportTaskDialogProps> = (
         variant="outlined"
         color="primary"
         onClick={handleClickOpen}
-        disabled={tasks[0]?.splitCode[0]?.length !== 3}
+        disabled={checkIfSplit()}
       >
         Export tasks
       </Button>
