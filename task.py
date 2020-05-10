@@ -5,7 +5,7 @@ def poly_part(c, n):
             result = str(c)
         else:
             if c == -1:
-            result = "-x"
+                result = "-x"
             elif c == 1:
                 result = "x"
             elif abs(c) > 1:
